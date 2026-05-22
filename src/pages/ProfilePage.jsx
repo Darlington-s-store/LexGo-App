@@ -25,11 +25,11 @@ const ProfilePage = () => {
 
   // Profile data state
   const [profile, setProfile] = useState({
-    fullName: 'Elkanah Wiseman',
-    email: 'elkanah.wiseman@lexgo.edu',
-    phone: '+233 24 123 4567',
-    institution: 'University of Ghana School of Law',
-    studyLevel: 'L100 (First Year)'
+    fullName: '',
+    email: '',
+    phone: '',
+    institution: '',
+    studyLevel: ''
   });
 
   // Background Watermark Cells & Symbols
@@ -82,7 +82,7 @@ const ProfilePage = () => {
         <div className="w-full md:w-80 flex-shrink-0 bg-slate-50/50 border border-slate-100 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm space-y-4">
           <div className="relative group">
             <div className="w-24 h-24 bg-amber-500 rounded-full flex items-center justify-center text-white text-4xl font-extrabold shadow-md">
-              U
+              {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : 'U'}
             </div>
             <div className="absolute inset-0 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer text-xs font-bold">
               Change
@@ -90,28 +90,28 @@ const ProfilePage = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-bold text-lexgo-dark">{profile.fullName}</h3>
+            <h3 className="text-lg font-bold text-lexgo-dark">{profile.fullName || 'Anonymous User'}</h3>
             <span className="text-xs text-gray-400 font-semibold uppercase tracking-wider block">
-              {profile.studyLevel}
+              {profile.studyLevel || 'Unspecified Level'}
             </span>
           </div>
 
           <div className="w-full pt-4 border-t border-gray-100 space-y-3.5 text-left">
             <div className="flex justify-between items-center text-sm">
               <span className="text-gray-500 font-medium">Study Streak</span>
-              <span className="text-[#E27D2C] font-bold">5 days</span>
+              <span className="text-[#E27D2C] font-bold">0 days</span>
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-gray-500 font-medium">Cases Studied</span>
-              <span className="text-[#3B82F6] font-bold">23</span>
+              <span className="text-[#3B82F6] font-bold">0</span>
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-gray-500 font-medium">AI Chats</span>
-              <span className="text-[#64748B] font-bold">47</span>
+              <span className="text-[#64748B] font-bold">0</span>
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-gray-500 font-medium">Level progress</span>
-              <span className="text-[#10B981] font-bold">85%</span>
+              <span className="text-[#10B981] font-bold">0%</span>
             </div>
           </div>
         </div>
@@ -140,6 +140,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 disabled={!isEditing}
+                placeholder="Enter your full name"
                 value={profile.fullName}
                 onChange={(e) => setProfile({ ...profile, fullName: e.target.value })}
                 className="w-full bg-white border border-gray-200 focus:border-lexgo-dark disabled:bg-slate-50/50 disabled:text-gray-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none transition font-medium"
@@ -155,6 +156,7 @@ const ProfilePage = () => {
               <input
                 type="email"
                 disabled={!isEditing}
+                placeholder="Enter your email address"
                 value={profile.email}
                 onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                 className="w-full bg-white border border-gray-200 focus:border-lexgo-dark disabled:bg-slate-50/50 disabled:text-gray-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none transition font-medium"
@@ -170,6 +172,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 disabled={!isEditing}
+                placeholder="Enter your phone number"
                 value={profile.phone}
                 onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                 className="w-full bg-white border border-gray-200 focus:border-lexgo-dark disabled:bg-slate-50/50 disabled:text-gray-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none transition font-medium"
@@ -185,6 +188,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 disabled={!isEditing}
+                placeholder="Enter your law school / institution"
                 value={profile.institution}
                 onChange={(e) => setProfile({ ...profile, institution: e.target.value })}
                 className="w-full bg-white border border-gray-200 focus:border-lexgo-dark disabled:bg-slate-50/50 disabled:text-gray-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none transition font-medium"
@@ -200,6 +204,7 @@ const ProfilePage = () => {
               <input
                 type="text"
                 disabled={!isEditing}
+                placeholder="Enter your level of study (e.g. L100)"
                 value={profile.studyLevel}
                 onChange={(e) => setProfile({ ...profile, studyLevel: e.target.value })}
                 className="w-full bg-white border border-gray-200 focus:border-lexgo-dark disabled:bg-slate-50/50 disabled:text-gray-500 rounded-xl px-4 py-2.5 text-xs sm:text-sm focus:outline-none transition font-medium"

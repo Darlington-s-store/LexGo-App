@@ -74,47 +74,8 @@ const NotesPage = () => {
     if (savedNotes) {
       setNotes(JSON.parse(savedNotes));
     } else {
-      // Prepopulate with mock notes matching the mockup
-      const mockNotes = [
-        {
-          id: 1,
-          title: 'Criminal Law - Key Term',
-          category: 'Criminal Law',
-          priority: 'Medium',
-          content: 'Criminal law involves rules set by the state to which would specify acts that are unacceptable and carry punishments.',
-          date: 'Aug 24, 2025',
-          timestamp: new Date('2025-08-24').getTime()
-        },
-        {
-          id: 2,
-          title: 'Criminal Law - Key Term',
-          category: 'Criminal Law',
-          priority: 'Medium',
-          content: 'Criminal law involves rules set by the state to which would specify acts that are unacceptable and carry punishments.',
-          date: 'Aug 24, 2025',
-          timestamp: new Date('2025-08-24').getTime()
-        },
-        {
-          id: 3,
-          title: 'Criminal Law - Key Term',
-          category: 'Criminal Law',
-          priority: 'Medium',
-          content: 'Criminal law involves rules set by the state to which would specify acts that are unacceptable and carry punishments.',
-          date: 'Aug 24, 2025',
-          timestamp: new Date('2025-08-24').getTime()
-        },
-        {
-          id: 4,
-          title: 'Criminal Law - Key Term',
-          category: 'Criminal Law',
-          priority: 'Medium',
-          content: 'Criminal law involves rules set by the state to which would specify acts that are unacceptable and carry punishments.',
-          date: 'Aug 24, 2025',
-          timestamp: new Date('2025-08-24').getTime()
-        }
-      ];
-      setNotes(mockNotes);
-      localStorage.setItem('lexgo_notes', JSON.stringify(mockNotes));
+      setNotes([]);
+      localStorage.setItem('lexgo_notes', JSON.stringify([]));
     }
   }, []);
 

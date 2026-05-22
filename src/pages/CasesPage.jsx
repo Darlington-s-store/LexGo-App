@@ -4,7 +4,8 @@ import {
   ChevronLeft, 
   Info,
   SlidersHorizontal,
-  X 
+  X,
+  Scale
 } from 'lucide-react';
 
 const CasesPage = () => {
@@ -12,104 +13,7 @@ const CasesPage = () => {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const casesData = [
-    {
-      id: 1,
-      title: "The Republic v. John Smith",
-      court: "Supreme Court of Ghana",
-      citation: "[2024] GHASC 15",
-      category: "Administrative Law",
-      coram: "Anin-Yeboah CJ, Dotse JSC, Appau JSC",
-      facts: [
-        "The applicant sought judicial review of a decision by the Minister.",
-        "The Minister failed to provide reasons for the administrative action."
-      ],
-      factsBody: "The applicant was a public officer whose contract was terminated by the Ministry of Justice. Under relevant constitutional guidelines, administrative bodies must act fairly and reasonably. The applicant argued that the failure to state reasons was a breach of natural justice. The case was brought to determine the scope of executive authority and requirement of fair hearing.",
-      issues: [
-        "Whether administrative bodies are required to provide reasons for their actions.",
-        "Whether judicial review lies for discretionary executive actions."
-      ],
-      decision: "The court granted the application for certiorari to quash the decision.",
-      reasoning: "The duty of fairness requires administrative bodies to act transparently. Providing reasons is essential to prevent arbitrary abuse of power.",
-      significance: "Sets a major precedent demanding administrative transparency across all ministries.",
-      relatedCases: [
-        "Republic v. Minister for Interior [2019] GHASC 3",
-        "Agyei v. Commissioner of Police [2012] GCA 5"
-      ]
-    },
-    {
-      id: 2,
-      title: "The Republic v. John Smith",
-      court: "Supreme Court of Ghana",
-      citation: "[2024] GHASC 15",
-      category: "Administrative Law",
-      coram: "Anin-Yeboah CJ, Dotse JSC, Appau JSC",
-      facts: [
-        "The applicant challenged the validity of a deportation order.",
-        "The applicant had resided in Ghana for 15 years prior to the order."
-      ],
-      factsBody: "The applicant, a foreign national with residency rights, was ordered to be deported without a hearing or prior notification. The applicant sought judicial review on the ground of procedural impropriety and abuse of power.",
-      issues: [
-        "Whether deportation orders are subject to the rules of natural justice.",
-        "Whether a long-term resident is entitled to a fair hearing before deportation."
-      ],
-      decision: "The court quashed the deportation order and ordered a fresh hearing.",
-      reasoning: "A long-term resident has a legitimate expectation of a fair hearing before rights can be stripped.",
-      significance: "Establishes procedural protections for resident foreign nationals.",
-      relatedCases: [
-        "Shalabi v. Attorney-General [1972] GLR 259",
-        "Republic v. Director of Immigration [2008] GHASC 8"
-      ]
-    },
-    {
-      id: 3,
-      title: "The Republic v. John Smith",
-      court: "Supreme Court of Ghana",
-      citation: "[2024] GHASC 15",
-      category: "Administrative Law",
-      coram: "Anin-Yeboah CJ, Dotse JSC, Appau JSC",
-      facts: [
-        "The applicant challenged a local assembly's refusal to issue a building permit.",
-        "No reason was given by the planning authority for the refusal."
-      ],
-      factsBody: "The applicant submitted building plans complying with zoning rules. The Municipal Assembly rejected the plans without explanation, halting construction of a commercial building. The applicant sought mandamus to compel permit issuance.",
-      issues: [
-        "Whether a municipal assembly can refuse a permit without providing zoning or structural reasons.",
-        "Whether mandamus is the appropriate remedy."
-      ],
-      decision: "Mandamus was granted directing the assembly to hear and determine the application on merits.",
-      reasoning: "Statutory discretion must be exercised reasonably and not arbitrarily or capriciously.",
-      significance: "Asserts that municipal actions are fully reviewable under administrative law principles.",
-      relatedCases: [
-        "Republic v. Accra Metropolitan Assembly [2015] GHASC 4",
-        "Osei v. Municipal Authority [2021] GCA 12"
-      ]
-    },
-    {
-      id: 4,
-      title: "The Republic v. Kofi Mensah",
-      court: "Supreme Court of Ghana",
-      citation: "[2023] GHASC 15",
-      category: "Criminal Law",
-      coram: "Anin-Yeboah CJ, Dotse JSC, Appau JSC",
-      facts: [
-        "The accused allegedly robbed a shopkeeper at night.",
-        "Witnesses claimed they saw Mensah fleeing the scene."
-      ],
-      factsBody: "Kofi Mensah was charged with robbery under the Criminal Offences Act, 1960 (Act 29). It was alleged that on the 3rd of January 2022, he attacked and robbed a shopkeeper in Kumasi. Mensah denied the charges, claiming mistaken identity. The case escalated to the Supreme Court after an appeal from the Court of Appeal.",
-      issues: [
-        "Whether the identification of Mensah was reliable.",
-        "Whether the conviction at the lower court was valid."
-      ],
-      decision: "The Supreme Court overturned the conviction.",
-      reasoning: "Whether the conviction at the lower court was valid. Identification evidence was unreliable; prosecution failed to prove guilt beyond reasonable doubt.",
-      significance: "Reinforces the principle that criminal convictions must rest on strong, reliable identification evidence.",
-      relatedCases: [
-        "Republic v. Arthur [2018] GHASC 10",
-        "Republic v. Boateng [2015] GCA 22"
-      ]
-    }
-  ];
+  const casesData = [];
 
   const filteredCases = casesData.filter(c => 
     c.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -142,72 +46,84 @@ const CasesPage = () => {
 
           {/* Cards Stack */}
           <div className="grid grid-cols-1 gap-6">
-            {filteredCases.map((item) => (
-              <div 
-                key={item.id} 
-                className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-8 relative shadow-sm hover:shadow-md transition duration-200 overflow-hidden flex flex-col justify-between"
-              >
-                <div className="relative z-10 space-y-2 max-w-[70%]">
-                  <h3 className="text-lg sm:text-xl font-bold text-lexgo-dark">{item.title}</h3>
-                  <div className="text-sm text-gray-400 font-medium leading-normal">
-                    <p>{item.court}</p>
-                    <p>{item.citation}</p>
+            {filteredCases.length > 0 ? (
+              filteredCases.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-8 relative shadow-sm hover:shadow-md transition duration-200 overflow-hidden flex flex-col justify-between"
+                >
+                  <div className="relative z-10 space-y-2 max-w-[70%]">
+                    <h3 className="text-lg sm:text-xl font-bold text-lexgo-dark">{item.title}</h3>
+                    <div className="text-sm text-gray-400 font-medium leading-normal">
+                      <p>{item.court}</p>
+                      <p>{item.citation}</p>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2 text-[#EA4335] font-bold text-xs sm:text-sm">
+                      {/* Red scale category icon */}
+                      <svg 
+                        className="w-4 h-4 text-[#EA4335]" 
+                        viewBox="0 0 100 100" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="3.5"
+                      >
+                        <circle cx="50" cy="15" r="4" fill="currentColor" />
+                        <line x1="50" y1="19" x2="50" y2="80" strokeWidth="4" />
+                        <line x1="15" y1="26" x2="85" y2="26" strokeWidth="5" />
+                        <path d="M 8,56 L 15,26 L 22,56" strokeWidth="3.5" />
+                        <path d="M 8,56 L 22,56 A 7,6 0 0 1 8,56 Z" fill="currentColor" />
+                        <path d="M 78,56 L 85,26 L 92,56" strokeWidth="3.5" />
+                        <path d="M 78,56 L 92,56 A 7,6 0 0 1 78,56 Z" fill="currentColor" />
+                        <path d="M 30,80 L 70,80" strokeWidth="4" />
+                      </svg>
+                      <span>{item.category}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 pt-2 text-[#EA4335] font-bold text-xs sm:text-sm">
-                    {/* Red scale category icon */}
+
+                  {/* Read Button */}
+                  <div className="relative z-10 mt-6">
+                    <button 
+                      onClick={() => setSelectedCase(item)}
+                      className="px-6 py-2 rounded-xl border border-gray-200 text-lexgo-dark font-bold text-xs sm:text-sm bg-white hover:bg-gray-50 transition cursor-pointer"
+                    >
+                      Read
+                    </button>
+                  </div>
+
+                  {/* Faint Scale Watermark */}
+                  <div className="absolute right-4 bottom-4 opacity-[0.08] text-lexgo-dark pointer-events-none">
                     <svg 
-                      className="w-4 h-4 text-[#EA4335]" 
+                      className="w-24 h-24 sm:w-32 sm:h-32" 
                       viewBox="0 0 100 100" 
                       fill="none" 
                       stroke="currentColor" 
-                      strokeWidth="3.5"
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
                     >
-                      <circle cx="50" cy="15" r="4" fill="currentColor" />
-                      <line x1="50" y1="19" x2="50" y2="80" strokeWidth="4" />
-                      <line x1="15" y1="26" x2="85" y2="26" strokeWidth="5" />
-                      <path d="M 8,56 L 15,26 L 22,56" strokeWidth="3.5" />
-                      <path d="M 8,56 L 22,56 A 7,6 0 0 1 8,56 Z" fill="currentColor" />
-                      <path d="M 78,56 L 85,26 L 92,56" strokeWidth="3.5" />
-                      <path d="M 78,56 L 92,56 A 7,6 0 0 1 78,56 Z" fill="currentColor" />
-                      <path d="M 30,80 L 70,80" strokeWidth="4" />
+                      <circle cx="50" cy="15" r="3" fill="currentColor" />
+                      <line x1="50" y1="18" x2="50" y2="80" strokeWidth="2.5" />
+                      <line x1="18" y1="24" x2="82" y2="24" strokeWidth="3.5" />
+                      <path d="M 10,54 L 18,24 L 26,54" strokeWidth="2" />
+                      <path d="M 10,54 L 26,54 A 8,7 0 0 1 10,54 Z" fill="none" />
+                      <path d="M 74,54 L 82,24 L 90,54" strokeWidth="2" />
+                      <path d="M 74,54 L 90,54 A 8,7 0 0 1 74,54 Z" fill="none" />
+                      <path d="M 32,80 L 68,80" strokeWidth="2.5" />
                     </svg>
-                    <span>{item.category}</span>
                   </div>
                 </div>
-
-                {/* Read Button */}
-                <div className="relative z-10 mt-6">
-                  <button 
-                    onClick={() => setSelectedCase(item)}
-                    className="px-6 py-2 rounded-xl border border-gray-200 text-lexgo-dark font-bold text-xs sm:text-sm bg-white hover:bg-gray-50 transition cursor-pointer"
-                  >
-                    Read
-                  </button>
+              ))
+            ) : (
+              <div className="bg-white border border-gray-100 rounded-3xl p-12 text-center shadow-sm space-y-4">
+                <div className="w-16 h-16 bg-[#FAF6F6] text-gray-400 rounded-2xl flex items-center justify-center mx-auto">
+                  <Scale className="w-8 h-8" />
                 </div>
-
-                {/* Faint Scale Watermark */}
-                <div className="absolute right-4 bottom-4 opacity-[0.08] text-lexgo-dark pointer-events-none">
-                  <svg 
-                    className="w-24 h-24 sm:w-32 sm:h-32" 
-                    viewBox="0 0 100 100" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="50" cy="15" r="3" fill="currentColor" />
-                    <line x1="50" y1="18" x2="50" y2="80" strokeWidth="2.5" />
-                    <line x1="18" y1="24" x2="82" y2="24" strokeWidth="3.5" />
-                    <path d="M 10,54 L 18,24 L 26,54" strokeWidth="2" />
-                    <path d="M 10,54 L 26,54 A 8,7 0 0 1 10,54 Z" fill="none" />
-                    <path d="M 74,54 L 82,24 L 90,54" strokeWidth="2" />
-                    <path d="M 74,54 L 90,54 A 8,7 0 0 1 74,54 Z" fill="none" />
-                    <path d="M 32,80 L 68,80" strokeWidth="2.5" />
-                  </svg>
+                <div className="space-y-1">
+                  <h4 className="font-bold text-lexgo-dark text-base">No cases found</h4>
+                  <p className="text-sm text-gray-400 font-medium">There are no legal cases loaded in the system right now.</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       ) : (

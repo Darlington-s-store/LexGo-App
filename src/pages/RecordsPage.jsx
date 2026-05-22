@@ -1,41 +1,10 @@
 import React, { useState } from 'react';
+import { BookOpen } from 'lucide-react';
 
 const RecordsPage = () => {
   const [activeTab, setActiveTab] = useState('Course List');
 
-  const semestersData = [
-    {
-      title: 'LEVEL 400 - 2ND SEM - 26/27',
-      courses: [
-        { code: 'IAW001', name: 'Introduction to Law', credits: '3 credit hrs' },
-        { code: 'IAW002', name: 'Evidence Law', credits: '3 credit hrs' },
-        { code: 'IAW003', name: 'Prosperity Law', credits: '3 credit hrs' }
-      ]
-    },
-    {
-      title: 'LEVEL 400 - 1ST SEM - 26/27',
-      courses: [
-        { code: 'IAW001', name: 'Introduction to Law', credits: '3 credit hrs' },
-        { code: 'IAW002', name: 'Evidence Law', credits: '2 credit hrs' },
-        { code: 'IAW003', name: 'Prosperity Law', credits: '3 credit hrs' }
-      ]
-    },
-    {
-      title: 'LEVEL 300 - 2ND SEM - 25/26',
-      courses: [
-        { code: 'IAW001', name: 'Introduction to Law', credits: '3 credit hrs' },
-        { code: 'IAW002', name: 'Evidence Law', credits: '3 credit hrs' },
-        { code: 'IAW003', name: 'Prosperity Law', credits: '3 credit hrs' }
-      ]
-    },
-    {
-      title: 'LEVEL 300 - 1ST SEM - 25/26',
-      courses: [
-        { code: 'IAW001', name: 'Introduction to Law', credits: '3 credit hrs' },
-        { code: 'IAW002', name: 'Evidence Law', credits: '3 credit hrs' }
-      ]
-    }
-  ];
+  const semestersData = [];
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -66,28 +35,40 @@ const RecordsPage = () => {
 
       {activeTab === 'Course List' ? (
         <div className="space-y-6">
-          {semestersData.map((semester, idx) => (
-            <div key={idx} className="space-y-2">
-              {/* Semester Header Banner */}
-              <div className="w-full bg-[#FAF6F6] px-5 py-3 rounded-xl font-bold text-lexgo-dark text-sm sm:text-base tracking-wide shadow-sm">
-                {semester.title}
+          {semestersData.length === 0 ? (
+            <div className="flex flex-col items-center justify-center bg-white border border-gray-100 rounded-3xl p-12 text-center shadow-sm">
+              <div className="w-16 h-16 bg-[#FAF6F6] rounded-full flex items-center justify-center mb-4">
+                <BookOpen className="w-8 h-8 text-lexgo-dark" />
               </div>
-              
-              {/* Course list */}
-              <div className="divide-y divide-gray-50/50 bg-white px-5 rounded-2xl border border-gray-100 shadow-sm">
-                {semester.courses.map((course, cIdx) => (
-                  <div key={cIdx} className="flex justify-between items-center py-4 text-sm sm:text-base">
-                    <span className="text-gray-700 font-medium">
-                      {course.code} - {course.name}
-                    </span>
-                    <span className="text-lexgo-dark font-semibold">
-                      {course.credits}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <h3 className="text-lg font-bold text-lexgo-dark mb-1">No Courses Registered</h3>
+              <p className="text-gray-400 max-w-sm text-sm">
+                You have not registered for any courses yet. When you enroll in courses, they will appear here.
+              </p>
             </div>
-          ))}
+          ) : (
+            semestersData.map((semester, idx) => (
+              <div key={idx} className="space-y-2">
+                {/* Semester Header Banner */}
+                <div className="w-full bg-[#FAF6F6] px-5 py-3 rounded-xl font-bold text-lexgo-dark text-sm sm:text-base tracking-wide shadow-sm">
+                  {semester.title}
+                </div>
+                
+                {/* Course list */}
+                <div className="divide-y divide-gray-50/50 bg-white px-5 rounded-2xl border border-gray-100 shadow-sm">
+                  {semester.courses.map((course, cIdx) => (
+                    <div key={cIdx} className="flex justify-between items-center py-4 text-sm sm:text-base">
+                      <span className="text-gray-700 font-medium">
+                        {course.code} - {course.name}
+                      </span>
+                      <span className="text-lexgo-dark font-semibold">
+                        {course.credits}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       ) : (
         /* Academic Transcript View */
@@ -102,7 +83,7 @@ const RecordsPage = () => {
               <div><span className="font-bold text-lexgo-dark">Student ID:</span> LXG-2026-9810</div>
               <div><span className="font-bold text-lexgo-dark">Enrollment Year:</span> 2024</div>
               <div><span className="font-bold text-lexgo-dark">Program:</span> LL.B. (Bachelor of Laws)</div>
-              <div><span className="font-bold text-lexgo-dark">Standing:</span> Dean's List (Honors)</div>
+              <div><span className="font-bold text-lexgo-dark">Standing:</span> N/A</div>
             </div>
           </div>
 
@@ -110,15 +91,15 @@ const RecordsPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center">
               <span className="text-xs text-gray-400 font-bold uppercase block mb-1">Cumulative GPA</span>
-              <span className="text-3xl font-extrabold text-lexgo-dark">3.84 / 4.00</span>
+              <span className="text-3xl font-extrabold text-lexgo-dark">0.00 / 4.00</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center">
               <span className="text-xs text-gray-400 font-bold uppercase block mb-1">Earned Credits</span>
-              <span className="text-3xl font-extrabold text-lexgo-dark">98 Hrs</span>
+              <span className="text-3xl font-extrabold text-lexgo-dark">0 Hrs</span>
             </div>
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 text-center">
               <span className="text-xs text-gray-400 font-bold uppercase block mb-1">Status</span>
-              <span className="text-3xl font-extrabold text-green-600">Excellent</span>
+              <span className="text-3xl font-extrabold text-gray-400">N/A</span>
             </div>
           </div>
 
@@ -137,22 +118,9 @@ const RecordsPage = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-50 text-gray-700">
                   <tr>
-                    <td className="py-3 font-semibold text-lexgo-dark">IAW001</td>
-                    <td className="py-3">Introduction to Law</td>
-                    <td className="py-3 text-center font-bold text-green-600">A</td>
-                    <td className="py-3 text-right">4.0</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-lexgo-dark">IAW002</td>
-                    <td className="py-3">Evidence Law</td>
-                    <td className="py-3 text-center font-bold text-green-600">A-</td>
-                    <td className="py-3 text-right">3.7</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-lexgo-dark">IAW003</td>
-                    <td className="py-3">Prosperity Law</td>
-                    <td className="py-3 text-center font-bold text-green-600">A</td>
-                    <td className="py-3 text-right">4.0</td>
+                    <td colSpan="4" className="py-8 text-center text-gray-400 font-medium">
+                      No academic records available.
+                    </td>
                   </tr>
                 </tbody>
               </table>

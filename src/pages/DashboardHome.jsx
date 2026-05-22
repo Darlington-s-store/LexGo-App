@@ -56,12 +56,7 @@ const DashboardHome = () => {
     },
   ];
 
-  const recentActivities = [
-    { id: 1, title: 'New Cases Added', time: '2 mins ago' },
-    { id: 2, title: 'New Cases Added', time: '2 mins ago' },
-    { id: 3, title: 'New Cases Added', time: '2 mins ago' },
-    { id: 4, title: 'New Cases Added', time: '2 mins ago' },
-  ];
+  const recentActivities = [];
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -154,33 +149,41 @@ const DashboardHome = () => {
           Recent Activity
         </h3>
 
-        <div className="bg-white border border-gray-100 rounded-3xl divide-y divide-gray-50 overflow-hidden shadow-sm">
-          {recentActivities.map((activity) => (
-            <div 
-              key={activity.id}
-              onClick={() => navigate('/dashboard/cases')}
-              className="flex items-center justify-between p-4 sm:p-5 hover:bg-gray-50/50 transition cursor-pointer group"
-            >
-              <div className="flex items-center min-w-0">
-                {/* Book icon wrapper */}
-                <div className="w-10 h-10 rounded-2xl bg-[#E6F4EA] text-[#137333] flex items-center justify-center flex-shrink-0 mr-4">
-                  <Book size={18} strokeWidth={2.5} />
-                </div>
-                
-                <div className="min-w-0">
-                  <h4 className="font-bold text-lexgo-dark text-sm sm:text-base tracking-tight truncate">
-                    {activity.title}
-                  </h4>
-                  <span className="text-xs text-gray-400 font-medium">
-                    {activity.time}
-                  </span>
-                </div>
-              </div>
+        <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
+          {recentActivities.length > 0 ? (
+            <div className="divide-y divide-gray-50">
+              {recentActivities.map((activity) => (
+                <div 
+                  key={activity.id}
+                  onClick={() => navigate('/dashboard/cases')}
+                  className="flex items-center justify-between p-4 sm:p-5 hover:bg-gray-50/50 transition cursor-pointer group"
+                >
+                  <div className="flex items-center min-w-0">
+                    {/* Book icon wrapper */}
+                    <div className="w-10 h-10 rounded-2xl bg-[#E6F4EA] text-[#137333] flex items-center justify-center flex-shrink-0 mr-4">
+                      <Book size={18} strokeWidth={2.5} />
+                    </div>
+                    
+                    <div className="min-w-0">
+                      <h4 className="font-bold text-lexgo-dark text-sm sm:text-base tracking-tight truncate">
+                        {activity.title}
+                      </h4>
+                      <span className="text-xs text-gray-400 font-medium">
+                        {activity.time}
+                      </span>
+                    </div>
+                  </div>
 
-              {/* Chevron icon right */}
-              <ChevronRight size={18} className="text-gray-300 group-hover:text-lexgo-dark transition duration-150 flex-shrink-0 ml-4" />
+                  {/* Chevron icon right */}
+                  <ChevronRight size={18} className="text-gray-300 group-hover:text-lexgo-dark transition duration-150 flex-shrink-0 ml-4" />
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className="p-8 text-center text-gray-400 font-medium text-sm">
+              No recent activity.
+            </div>
+          )}
         </div>
       </section>
     </div>
