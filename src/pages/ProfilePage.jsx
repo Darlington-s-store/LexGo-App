@@ -24,12 +24,25 @@ const ProfilePage = () => {
   const [isSaved, setIsSaved] = useState(false);
 
   // Profile data state
-  const [profile, setProfile] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    institution: '',
-    studyLevel: ''
+  const [profile, setProfile] = useState(() => {
+    try {
+      const saved = localStorage.getItem('lexgo_profile');
+      return saved ? JSON.parse(saved) : {
+        fullName: '',
+        email: '',
+        phone: '',
+        institution: '',
+        studyLevel: ''
+      };
+    } catch {
+      return {
+        fullName: '',
+        email: '',
+        phone: '',
+        institution: '',
+        studyLevel: ''
+      };
+    }
   });
 
   // Background Watermark Cells & Symbols
@@ -38,6 +51,13 @@ const ProfilePage = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
+    try {
+      localStorage.setItem('lexgo_profile', JSON.stringify(profile));
+      // Dispatch a storage event manually to notify components on the same window/tab
+      window.dispatchEvent(new Event('storage'));
+    } catch (err) {
+      console.error(err);
+    }
     setIsEditing(false);
     setIsSaved(true);
     setTimeout(() => {

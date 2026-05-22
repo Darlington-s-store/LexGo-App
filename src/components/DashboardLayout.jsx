@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -22,6 +22,33 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+
+  const [profile, setProfile] = useState(() => {
+    try {
+      const saved = localStorage.getItem('lexgo_profile');
+      return saved ? JSON.parse(saved) : { fullName: '', studyLevel: '' };
+    } catch {
+      return { fullName: '', studyLevel: '' };
+    }
+  });
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      try {
+        const saved = localStorage.getItem('lexgo_profile');
+        if (saved) {
+          setProfile(JSON.parse(saved));
+        } else {
+          setProfile({ fullName: '', studyLevel: '' });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    handleStorageChange();
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [location.pathname]);
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -126,15 +153,15 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
         <div className="space-y-2.5 px-2 pb-2">
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-500 font-medium">Study Streak</span>
-            <span className="text-[#E27D2C] font-bold">5 days</span>
+            <span className="text-[#E27D2C] font-bold">0 days</span>
           </div>
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-500 font-medium">Cases Studied</span>
-            <span className="text-[#3B82F6] font-bold">23</span>
+            <span className="text-[#3B82F6] font-bold">0</span>
           </div>
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-500 font-medium">AI Chats</span>
-            <span className="text-[#64748B] font-bold">47</span>
+            <span className="text-[#64748B] font-bold">0</span>
           </div>
         </div>
       </div>
@@ -188,9 +215,6 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
               <div className="p-2 text-lexgo-dark rounded-full bg-gray-50 hover:bg-gray-100">
                 <Bell size={20} />
               </div>
-              <span className="absolute -top-1 -right-1 bg-[#EA4335] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
-                6
-              </span>
             </div>
 
             {/* Profile badge with dropdown */}
@@ -199,15 +223,15 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
                 className="flex items-center gap-3 pl-2 border-l border-gray-100 cursor-pointer hover:opacity-85 transition select-none"
               >
-                <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-semibold">
-                  <User size={20} />
+                <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm select-none">
+                  {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : <User size={18} />}
                 </div>
                 <div className="hidden sm:block text-left">
                   <div className="text-sm font-bold text-lexgo-dark leading-tight flex items-center gap-1">
-                    <span>Law Student</span>
+                    <span>{profile.studyLevel || 'Law Student'}</span>
                     <ChevronDown size={14} className="text-gray-400" />
                   </div>
-                  <div className="text-xs text-gray-400 font-medium">Elkanah Wiseman</div>
+                  <div className="text-xs text-gray-400 font-medium">{profile.fullName || 'Guest User'}</div>
                 </div>
               </div>
 

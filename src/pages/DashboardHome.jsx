@@ -70,18 +70,18 @@ const DashboardHome = () => {
             <span className="tracking-wide">Case of the Day</span>
           </div>
           
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-            Republic V.Mensah
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white/40">
+            No Case of the Day Selected
           </h2>
           
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
-            This case examines the scope of citizens rights agains unlawful search and seizure...
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed font-light">
+            Please add cases or select a landmark decision from the Cases page to feature it here.
           </p>
           
           <button 
             type="button" 
-            onClick={() => navigate('/dashboard/cases')}
-            className="inline-flex items-center justify-center bg-[#1E293B]/70 border border-slate-700/80 hover:bg-[#1E293B] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition duration-150 cursor-pointer shadow-sm"
+            disabled
+            className="inline-flex items-center justify-center bg-slate-800/40 border border-slate-700/40 text-slate-500 text-sm font-semibold px-6 py-2.5 rounded-xl cursor-not-allowed shadow-sm select-none"
           >
             Read Full Case
           </button>
