@@ -33,13 +33,23 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
   });
 
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem('lexgo_logged_in') === 'true';
+    const savedProfile = localStorage.getItem('lexgo_profile');
+    if (!isLoggedIn || !savedProfile) {
+      localStorage.removeItem('lexgo_logged_in');
+      navigate('/login');
+      return;
+    }
+
     const handleStorageChange = () => {
       try {
         const saved = localStorage.getItem('lexgo_profile');
-        if (saved) {
+        const activeLogin = localStorage.getItem('lexgo_logged_in') === 'true';
+        if (saved && activeLogin) {
           setProfile(JSON.parse(saved));
         } else {
-          setProfile({ fullName: '', studyLevel: '' });
+          localStorage.removeItem('lexgo_logged_in');
+          navigate('/login');
         }
       } catch (e) {
         console.error(e);
@@ -48,7 +58,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
     window.addEventListener('storage', handleStorageChange);
     handleStorageChange();
     return () => window.removeEventListener('storage', handleStorageChange);
-  }, [location.pathname]);
+  }, [location.pathname, navigate]);
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -311,6 +321,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
               <button
                 onClick={() => {
                   setIsLogoutModalOpen(false);
+                  localStorage.removeItem('lexgo_logged_in');
                   navigate('/login');
                 }}
                 className="flex-1 py-2.5 px-4 rounded-xl bg-lexgo-dark text-white font-bold text-xs hover:bg-opacity-95 transition cursor-pointer text-center"

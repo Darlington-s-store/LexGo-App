@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
@@ -9,9 +9,21 @@ import Stepper from '../components/Stepper';
 
 const SignupStep1 = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
 
   const handleNext = (e) => {
     e.preventDefault();
+    if (!email.trim() || !password.trim() || !fullName.trim()) {
+      alert('Please fill out all fields.');
+      return;
+    }
+    try {
+      localStorage.setItem('lexgo_signup_temp', JSON.stringify({ email, password, fullName }));
+    } catch (err) {
+      console.error(err);
+    }
     navigate('/signup-step-2');
   };
 
@@ -37,6 +49,9 @@ const SignupStep1 = () => {
               type="email"
               placeholder="Enter your Email"
               icon={Mail}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             
             <InputField 
@@ -44,6 +59,9 @@ const SignupStep1 = () => {
               type="password"
               placeholder="Enter your password"
               icon={Lock}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             <InputField 
@@ -51,6 +69,9 @@ const SignupStep1 = () => {
               type="text"
               placeholder="Enter Your Full Name"
               icon={User}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
             />
 
             <Button type="submit" className="mt-4">

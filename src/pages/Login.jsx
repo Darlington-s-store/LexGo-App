@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
@@ -8,11 +8,36 @@ import Button from '../components/Button';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Handle login logic
-    navigate('/dashboard'); // Redirect to student dashboard
+    if (!email.trim() || !password.trim()) {
+      alert('Please fill out all fields.');
+      return;
+    }
+    
+    try {
+      const savedProfile = localStorage.getItem('lexgo_profile');
+      if (savedProfile) {
+        const parsed = JSON.parse(savedProfile);
+        if (parsed.email === email) {
+          if (parsed.password === password) {
+            localStorage.setItem('lexgo_logged_in', 'true');
+            navigate('/dashboard');
+            return;
+          } else {
+            alert('Invalid password. Please try again.');
+            return;
+          }
+        }
+      }
+      alert('No account found with this email. Please sign up first.');
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred during login. Please try again.');
+    }
   };
 
   return (
@@ -32,6 +57,9 @@ const Login = () => {
               type="email"
               placeholder="Enter your Email"
               icon={Mail}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             
             <InputField 
@@ -39,6 +67,9 @@ const Login = () => {
               type="password"
               placeholder="Enter your password"
               icon={Lock}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             <div className="flex justify-end mb-6">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
@@ -10,9 +10,40 @@ import Stepper from '../components/Stepper';
 
 const SignupStep2 = () => {
   const navigate = useNavigate();
+  const [institution, setInstitution] = useState('');
+  const [studentId, setStudentId] = useState('');
+  const [studyLevel, setStudyLevel] = useState('');
+  const [program, setProgram] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSignup = (e) => {
     e.preventDefault();
+    if (!institution || !studentId.trim() || !studyLevel || !program || !password.trim()) {
+      alert('Please fill out all fields.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    try {
+      const step1Data = JSON.parse(localStorage.getItem('lexgo_signup_temp') || '{}');
+      const finalProfile = {
+        fullName: step1Data.fullName || '',
+        email: step1Data.email || '',
+        institution,
+        studentId,
+        studyLevel,
+        program,
+        password
+      };
+      localStorage.setItem('lexgo_profile', JSON.stringify(finalProfile));
+      localStorage.removeItem('lexgo_signup_temp');
+    } catch (err) {
+      console.error(err);
+    }
     navigate('/verify-email');
   };
 
@@ -35,15 +66,20 @@ const SignupStep2 = () => {
           <form onSubmit={handleSignup} className="space-y-4 pb-8">
             <SelectField 
               label="Name of Institution *"
-              placeholder="Enter your intitution name"
-              options={['Harvard University', 'Yale University', 'Stanford University']}
-              defaultValue=""
+              placeholder="Select your institution name"
+              options={['Harvard University', 'Yale University', 'Stanford University', 'Ghana School of Law', 'University of Ghana']}
+              value={institution}
+              onChange={(e) => setInstitution(e.target.value)}
+              required
             />
             
             <InputField 
               label="STUDENT ID"
               type="text"
               placeholder="Enter your student ID"
+              value={studentId}
+              onChange={(e) => setStudentId(e.target.value)}
+              required
             />
 
             <div className="flex gap-4">
@@ -52,7 +88,9 @@ const SignupStep2 = () => {
                   label="LEVEL OF STUDY"
                   placeholder="Select level"
                   options={['Undergraduate', 'Postgraduate']}
-                  defaultValue=""
+                  value={studyLevel}
+                  onChange={(e) => setStudyLevel(e.target.value)}
+                  required
                 />
               </div>
               <div className="w-1/2">
@@ -60,7 +98,9 @@ const SignupStep2 = () => {
                   label="PROGRAM"
                   placeholder="Select program"
                   options={['LLB', 'JD', 'LLM']}
-                  defaultValue=""
+                  value={program}
+                  onChange={(e) => setProgram(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -70,6 +110,9 @@ const SignupStep2 = () => {
               type="password"
               placeholder="Enter your password"
               icon={Lock}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             <InputField 
@@ -77,12 +120,16 @@ const SignupStep2 = () => {
               type="password"
               placeholder="confirm your password"
               icon={Lock}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             />
 
             <div className="flex items-start mt-4 mb-6">
               <input 
                 type="checkbox" 
                 id="terms" 
+                required
                 className="mt-1 h-4 w-4 rounded border-gray-300 text-lexgo-dark focus:ring-lexgo-dark"
               />
               <label htmlFor="terms" className="ml-2 block text-xs text-gray-500">
