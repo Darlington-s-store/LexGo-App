@@ -64,8 +64,8 @@ const Signup = () => {
   return (
     <div className="flex min-h-screen bg-white">
       <Sidebar />
-      <div className="w-full md:w-1/2 flex flex-col items-center p-8 sm:p-12 h-screen overflow-y-auto">
-        <div className="w-full max-w-md my-auto pt-6 pb-6">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-6 sm:p-12 min-h-screen">
+        <div className="w-full max-w-md py-6">
           <div className="flex flex-col items-center mb-6">
             <Logo color="#0A1128" textClass="text-lexgo-dark" size="small" className="mb-2" />
           </div>
@@ -127,8 +127,8 @@ const Signup = () => {
                 required
               />
 
-              <div className="flex gap-4">
-                <div className="w-1/2">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="w-full sm:w-1/2">
                   <SelectField 
                     label="LEVEL OF STUDY *"
                     placeholder="Select level"
@@ -138,7 +138,7 @@ const Signup = () => {
                     required
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="w-full sm:w-1/2">
                   <SelectField 
                     label="PROGRAM *"
                     placeholder="Select program"
