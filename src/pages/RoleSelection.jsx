@@ -68,25 +68,16 @@ const RoleSelection = () => {
 
             {/* Description */}
             <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
-              We are working hard to bring the {pendingRole} portal online. In the meantime, you can explore the platform by signing up as a Student.
+              We are working hard to bring the {pendingRole} portal online. Please check back later or contact administration for assistance.
             </p>
 
             {/* Action Buttons */}
-            <div className="w-full flex flex-col gap-2">
-              <button
-                onClick={() => {
-                  setShowModal(false);
-                  navigate('/signup');
-                }}
-                className="w-full py-2.5 px-4 rounded-xl bg-lexgo-dark text-white font-bold text-xs hover:bg-opacity-95 transition cursor-pointer text-center"
-              >
-                Sign Up as Student
-              </button>
+            <div className="w-full">
               <button
                 onClick={() => setShowModal(false)}
-                className="w-full py-2.5 px-4 rounded-xl border border-gray-200 text-gray-600 font-bold text-xs hover:bg-gray-50 transition cursor-pointer text-center"
+                className="w-full py-2.5 px-4 rounded-xl bg-lexgo-dark text-white font-bold text-xs hover:bg-opacity-95 transition cursor-pointer text-center"
               >
-                Cancel
+                Okay, Go Back
               </button>
             </div>
           </div>
