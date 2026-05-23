@@ -18,7 +18,7 @@ const RoleSelection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-lexgo-dark pattern-bg flex flex-col items-center justify-center p-6 relative">
+    <div className="fixed inset-0 overflow-hidden bg-lexgo-dark pattern-bg flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-sm flex flex-col items-center z-10">
         <Logo color="white" textClass="text-white" size="large" className="mb-12" />
         
