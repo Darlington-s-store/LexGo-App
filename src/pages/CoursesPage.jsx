@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   BookOpen, 
   Check, 
@@ -37,6 +37,16 @@ const CoursesPage = () => {
       return [];
     }
   });
+
+  useEffect(() => {
+    if (!localStorage.getItem('lexgo_v2_reset_done')) {
+      localStorage.removeItem('lexgo_enrolled_courses');
+      localStorage.removeItem('lexgo_mounted_courses');
+      localStorage.setItem('lexgo_v2_reset_done', 'true');
+      setMountedCourses([]);
+      setEnrolledCourses([]);
+    }
+  }, []);
 
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false);
   const [customTitle, setCustomTitle] = useState('');
