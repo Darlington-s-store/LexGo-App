@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import RoleSelection from './pages/RoleSelection';
 import Login from './pages/Login';
-import SignupStep1 from './pages/SignupStep1';
-import SignupStep2 from './pages/SignupStep2';
+import Signup from './pages/Signup';
 import EmailVerification from './pages/EmailVerification';
 import PhoneVerification from './pages/PhoneVerification';
 import SettingUp from './pages/SettingUp';
@@ -32,8 +31,7 @@ function App() {
         {/* Pages */}
         <Route path="/role-selection" element={<RoleSelection />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup-step-1" element={<SignupStep1 />} />
-        <Route path="/signup-step-2" element={<SignupStep2 />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/verify-email" element={<EmailVerification />} />
         <Route path="/verify-phone" element={<PhoneVerification />} />
         <Route path="/setting-up" element={<SettingUp />} />

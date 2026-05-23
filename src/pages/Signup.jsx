@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Lock } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Mail, Lock, User } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Logo from '../components/Logo';
 import InputField from '../components/InputField';
 import SelectField from '../components/SelectField';
 import Button from '../components/Button';
-import Stepper from '../components/Stepper';
 
-const SignupStep2 = () => {
+const Signup = () => {
   const navigate = useNavigate();
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
   const [institution, setInstitution] = useState('');
   const [studentId, setStudentId] = useState('');
   const [studyLevel, setStudyLevel] = useState('');
@@ -19,7 +20,7 @@ const SignupStep2 = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (!institution || !studentId.trim() || !studyLevel || !program || !password.trim()) {
+    if (!fullName.trim() || !email.trim() || !institution || !studentId.trim() || !studyLevel || !program || !password.trim() || !confirmPassword.trim()) {
       alert('Please fill out all fields.');
       return;
     }
@@ -29,18 +30,16 @@ const SignupStep2 = () => {
     }
 
     try {
-      const step1Data = JSON.parse(localStorage.getItem('lexgo_signup_temp') || '{}');
       const finalProfile = {
-        fullName: step1Data.fullName || '',
-        email: step1Data.email || '',
+        fullName: fullName.trim(),
+        email: email.trim(),
         institution,
-        studentId,
+        studentId: studentId.trim(),
         studyLevel,
         program,
         password
       };
       localStorage.setItem('lexgo_profile', JSON.stringify(finalProfile));
-      localStorage.removeItem('lexgo_signup_temp');
     } catch (err) {
       console.error(err);
     }
@@ -51,19 +50,37 @@ const SignupStep2 = () => {
     <div className="flex min-h-screen bg-white">
       <Sidebar />
       <div className="w-full md:w-1/2 flex flex-col items-center p-8 sm:p-12 h-screen overflow-y-auto">
-        <div className="w-full max-w-md my-auto">
-          <div className="flex flex-col items-center mb-6 pt-4">
+        <div className="w-full max-w-md my-auto pt-6 pb-6">
+          <div className="flex flex-col items-center mb-6">
             <Logo color="#0A1128" textClass="text-lexgo-dark" size="small" className="mb-2" />
           </div>
 
-          <Stepper currentStep={2} />
-
-          <div className="mb-6">
-            <h2 className="text-3xl font-bold text-lexgo-dark mb-1">Academic Information</h2>
-            <p className="text-gray-500 text-sm">Fill in your academic details</p>
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-lexgo-dark mb-1">Create Student Account</h2>
+            <p className="text-gray-500 text-sm">Join LexGo to unlock legal courses and study records</p>
           </div>
 
-          <form onSubmit={handleSignup} className="space-y-4 pb-8">
+          <form onSubmit={handleSignup} className="space-y-4">
+            <InputField 
+              label="Full Name *"
+              type="text"
+              placeholder="Enter Your Full Name"
+              icon={User}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+
+            <InputField 
+              label="Email Address *"
+              type="email"
+              placeholder="Enter your Email"
+              icon={Mail}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
             <SelectField 
               label="Name of Institution *"
               placeholder="Select your institution name"
@@ -74,7 +91,7 @@ const SignupStep2 = () => {
             />
             
             <InputField 
-              label="STUDENT ID"
+              label="STUDENT ID *"
               type="text"
               placeholder="Enter your student ID"
               value={studentId}
@@ -85,7 +102,7 @@ const SignupStep2 = () => {
             <div className="flex gap-4">
               <div className="w-1/2">
                 <SelectField 
-                  label="LEVEL OF STUDY"
+                  label="LEVEL OF STUDY *"
                   placeholder="Select level"
                   options={['Undergraduate', 'Postgraduate']}
                   value={studyLevel}
@@ -95,7 +112,7 @@ const SignupStep2 = () => {
               </div>
               <div className="w-1/2">
                 <SelectField 
-                  label="PROGRAM"
+                  label="PROGRAM *"
                   placeholder="Select program"
                   options={['LLB', 'JD', 'LLM']}
                   value={program}
@@ -106,7 +123,7 @@ const SignupStep2 = () => {
             </div>
 
             <InputField 
-              label="PASSWORD"
+              label="PASSWORD *"
               type="password"
               placeholder="Enter your password"
               icon={Lock}
@@ -116,9 +133,9 @@ const SignupStep2 = () => {
             />
 
             <InputField 
-              label="CONFIRM PASSWORD"
+              label="CONFIRM PASSWORD *"
               type="password"
-              placeholder="confirm your password"
+              placeholder="Confirm your password"
               icon={Lock}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -130,21 +147,25 @@ const SignupStep2 = () => {
                 type="checkbox" 
                 id="terms" 
                 required
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-lexgo-dark focus:ring-lexgo-dark"
+                className="mt-1 h-4 w-4 rounded border-gray-300 text-lexgo-dark focus:ring-lexgo-dark cursor-pointer"
               />
-              <label htmlFor="terms" className="ml-2 block text-xs text-gray-500">
-                By you clicking Sign Up, you agree to our <span className="text-orange-500 hover:underline cursor-pointer">Terms & Conditions</span> and <span className="text-orange-500 hover:underline cursor-pointer">Privacy Policy</span>.
+              <label htmlFor="terms" className="ml-2 block text-xs text-gray-500 select-none">
+                By clicking Sign Up, you agree to our <span className="text-[#E27D2C] hover:underline cursor-pointer font-semibold">Terms & Conditions</span> and <span className="text-[#E27D2C] hover:underline cursor-pointer font-semibold">Privacy Policy</span>.
               </label>
             </div>
 
             <Button type="submit">
-              Sign Up
+              Create Account
             </Button>
           </form>
+
+          <p className="text-center text-sm text-gray-500 mt-6">
+            Already have an account? <Link to="/login" className="font-semibold text-lexgo-dark hover:underline underline-offset-2">Log In</Link>
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignupStep2;
+export default Signup;
