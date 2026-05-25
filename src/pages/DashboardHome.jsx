@@ -181,18 +181,9 @@ const DashboardHome = () => {
   const ActiveIcon = activeCard.icon;
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-6 sm:space-y-8 animate-fade-in">
       {/* Daily Highlights Section */}
       <section>
-        <div className="flex justify-between items-center mb-5">
-          <div>
-            <h3 className="text-xl font-bold text-lexgo-dark tracking-tight">Daily Highlights</h3>
-            <p className="text-xs text-gray-500 font-medium mt-0.5">Your curated legal learning content for today</p>
-          </div>
-          <span className="text-xs font-semibold text-slate-400 bg-slate-100/60 px-3 py-1 rounded-full border border-slate-200/50">
-            {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-          </span>
-        </div>
         
         {/* Carousel Card Slider */}
         <div className="relative w-full">
@@ -337,7 +328,10 @@ const DashboardHome = () => {
             {dailyCards.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentSlide(index);
+                }}
                 className={`transition-all duration-300 cursor-pointer h-2 ${
                   currentSlide === index 
                     ? 'w-6 bg-[#0A1128] rounded-full' 
@@ -350,22 +344,22 @@ const DashboardHome = () => {
         </div>
       </section>
 
-      {/* Quick Actions Section */}
-      <section>
-        <h3 className="text-lg sm:text-xl font-bold text-lexgo-dark mb-4 tracking-tight">
+      {/* Quick Actions Container Card */}
+      <section className="bg-white border border-gray-100/80 rounded-[32px] p-6 sm:p-8 shadow-sm">
+        <h3 className="text-lg sm:text-xl font-bold text-lexgo-dark mb-6 tracking-tight">
           Quick Actions
         </h3>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-6">
           {quickActions.map((action) => {
             const Icon = action.icon;
             return (
               <div
                 key={action.title}
                 onClick={() => handleActionClick(action.title)}
-                className="bg-white border border-gray-100 rounded-2xl p-6 flex flex-col items-center justify-center text-center transition duration-200 hover:shadow-md hover:border-gray-200 cursor-pointer group"
+                className="flex flex-col items-center justify-center text-center transition duration-200 cursor-pointer group hover:scale-[1.02]"
               >
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition duration-200 group-hover:scale-105 ${action.bg} ${action.color}`}>
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-3 transition duration-200 group-hover:scale-105 ${action.bg} ${action.color}`}>
                   <Icon size={20} strokeWidth={2.5} />
                 </div>
                 
@@ -373,7 +367,7 @@ const DashboardHome = () => {
                   {action.title}
                 </h4>
                 
-                <p className="text-gray-400 text-xs mt-1 leading-normal font-medium">
+                <p className="text-gray-400 text-[10px] sm:text-xs mt-1 leading-normal font-medium max-w-[140px] mx-auto">
                   {action.subtext}
                 </p>
               </div>
