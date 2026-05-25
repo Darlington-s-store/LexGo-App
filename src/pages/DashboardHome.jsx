@@ -13,6 +13,51 @@ import {
   X
 } from 'lucide-react';
 
+const CaseIcon = ({ className }) => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
+    <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
+    <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
+    <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
+    <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
+    <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
+    <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
+    <path d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" fill="currentColor" />
+    <path d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" fill="currentColor" />
+  </svg>
+);
+
+const TermIcon = ({ className }) => (
+  <svg viewBox="0 0 100 100" fill="currentColor" className={className}>
+    <path d="M 46,25 C 30,22 18,28 12,32 L 12,77 C 18,73 30,68 46,71 Z" />
+    <path d="M 54,25 C 70,22 82,28 88,32 L 88,77 C 82,73 70,68 54,71 Z" />
+    <path d="M 48,26 L 52,26 L 52,73 L 48,73 Z" />
+    <path d="M 12,77 C 18,81 30,76 46,79 C 62,76 74,81 88,77 C 88,79 82,83 70,83 C 54,80 46,84 30,83 C 18,83 12,79 12,77 Z" opacity="0.8" />
+  </svg>
+);
+
+const DictumIcon = ({ className }) => (
+  <svg viewBox="0 0 100 100" fill="currentColor" className={className}>
+    <path d="M 50,15 C 26,15 10,28 10,48 C 10,60 18,72 32,77 C 30,85 22,90 16,92 C 26,92 38,87 45,81 C 47,81 48,81 50,81 C 74,81 90,68 90,48 C 90,28 74,15 50,15 Z" />
+    <path d="M 38,38 L 44,38 L 41,48 L 45,48 L 42,58 L 36,58 L 39,48 L 35,48 Z M 58,38 L 64,38 L 61,48 L 65,48 L 62,58 L 56,58 L 59,48 L 55,48 Z" fill="#0A1128" />
+  </svg>
+);
+
+const HistoryIcon = ({ className }) => (
+  <svg viewBox="0 0 100 100" fill="currentColor" className={className}>
+    <rect x="15" y="24" width="70" height="60" rx="10" />
+    <path d="M 15,24 L 85,24 L 85,42 L 15,42 Z" fill="#F59E0B" />
+    <rect x="28" y="14" width="8" height="16" rx="4" fill="#E2E8F0" />
+    <rect x="64" y="14" width="8" height="16" rx="4" fill="#E2E8F0" />
+    <circle cx="32" cy="54" r="4.5" fill="#0A1128" />
+    <circle cx="50" cy="54" r="4.5" fill="#0A1128" />
+    <circle cx="68" cy="54" r="4.5" fill="#0A1128" />
+    <circle cx="32" cy="70" r="4.5" fill="#0A1128" />
+    <circle cx="50" cy="70" r="4.5" fill="#0A1128" />
+    <circle cx="68" cy="70" r="4.5" fill="#0A1128" />
+  </svg>
+);
+
 const dailyCards = [
   {
     id: 'case',
@@ -20,7 +65,7 @@ const dailyCards = [
     tag: 'DAILY CASE',
     title: 'Republic v. Mensah',
     citation: '[2024] SCGLR 104',
-    icon: Scale,
+    icon: CaseIcon,
     bgClass: 'bg-indigo-50/40 hover:bg-indigo-50/80 border-indigo-100/50 text-indigo-700',
     iconBg: 'bg-indigo-100 text-indigo-600',
     summary: 'Evaluating the constitutional limits of search and seizure without judicial warrants.',
@@ -37,7 +82,7 @@ const dailyCards = [
     tag: 'DAILY TERM',
     title: 'Actus Reus',
     citation: 'Latin: "Guilty Act"',
-    icon: BookOpen,
+    icon: TermIcon,
     bgClass: 'bg-emerald-50/40 hover:bg-emerald-50/80 border-emerald-100/50 text-emerald-700',
     iconBg: 'bg-emerald-100 text-emerald-600',
     summary: 'The physical act, conduct, or omission that constitutes the binding element of a crime.',
@@ -54,7 +99,7 @@ const dailyCards = [
     tag: 'DAILY DICTUM',
     title: 'Fiat Justitia Ruat Caelum',
     citation: 'Lord Mansfield (1770)',
-    icon: Quote,
+    icon: DictumIcon,
     bgClass: 'bg-violet-50/40 hover:bg-violet-50/80 border-violet-100/50 text-violet-700',
     iconBg: 'bg-violet-100 text-violet-600',
     summary: '"Let justice be done though the heavens fall" - representing absolute judicial duty.',
@@ -71,7 +116,7 @@ const dailyCards = [
     tag: 'LEGAL HISTORY',
     title: 'Brown v. Board of Education',
     citation: 'May 17, 1954',
-    icon: Calendar,
+    icon: HistoryIcon,
     bgClass: 'bg-amber-50/40 hover:bg-amber-50/80 border-amber-100/50 text-amber-700',
     iconBg: 'bg-amber-100 text-amber-600',
     summary: 'US Supreme Court ruled that racial segregation in public schools is unconstitutional.',
@@ -168,7 +213,7 @@ const DashboardHome = () => {
           >
             {/* Top Row: Large Icon */}
             <div className="z-10">
-              <ActiveIcon size={56} className="text-white stroke-[1.5] transition-transform duration-300 group-hover:scale-105" />
+              <ActiveIcon className="w-16 h-16 text-white transition-transform duration-300 group-hover:scale-105" />
             </div>
 
             {/* Bottom Row: Text content */}
@@ -190,19 +235,32 @@ const DashboardHome = () => {
             </div>
 
             {/* Mpatapo Watermark on the Right */}
-            <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-end p-6 opacity-[0.06] group-hover:opacity-[0.09] transition-opacity duration-300 pointer-events-none z-0 text-white">
+            <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-end p-6 pointer-events-none z-0">
               <svg
                 viewBox="0 0 100 100"
                 fill="none"
-                stroke="currentColor"
-                strokeWidth="4.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 className="w-full h-full max-w-[220px] md:max-w-[280px]"
               >
-                {/* Mpatapo Knot: Horizontal and Vertical interlocking infinity loops */}
-                <path d="M 50,50 C 35,30 20,30 20,50 C 20,70 35,70 50,50 C 65,30 80,30 80,50 C 80,70 65,70 50,50 Z" />
-                <path d="M 50,50 C 30,35 30,20 50,20 C 70,20 70,35 50,50 C 30,65 30,80 50,80 C 70,80 70,65 50,50 Z" />
+                {/* Rotate the entire knot by 45 degrees to match the mockup */}
+                <g transform="rotate(45 50 50)">
+                  {/* Thick base stroke in semi-transparent white */}
+                  <path 
+                    d="M 50,50 C 35,30 20,30 20,50 C 20,70 35,70 50,50 C 65,30 80,30 80,50 C 80,70 65,70 50,50 Z M 50,50 C 30,35 30,20 50,20 C 70,20 70,35 50,50 C 30,65 30,80 50,80 C 70,80 70,65 50,50 Z" 
+                    stroke="rgba(255, 255, 255, 0.08)" 
+                    strokeWidth="14" 
+                  />
+                  <circle cx="50" cy="50" r="7" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="14" />
+                  
+                  {/* Thin overlay stroke matching the card background to cut a hollow channel */}
+                  <path 
+                    d="M 50,50 C 35,30 20,30 20,50 C 20,70 35,70 50,50 C 65,30 80,30 80,50 C 80,70 65,70 50,50 Z M 50,50 C 30,35 30,20 50,20 C 70,20 70,35 50,50 C 30,65 30,80 50,80 C 70,80 70,65 50,50 Z" 
+                    stroke="#0A1128" 
+                    strokeWidth="6" 
+                  />
+                  <circle cx="50" cy="50" r="7" stroke="#0A1128" strokeWidth="6" />
+                </g>
               </svg>
             </div>
           </div>
