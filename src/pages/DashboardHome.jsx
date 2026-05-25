@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Scale, 
-  MessageSquare, 
   HelpCircle, 
   Notebook, 
   BookOpen, 
@@ -46,6 +45,27 @@ const BrainIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-3.88 2.5 2.5 0 0 1 0-3.12 2.5 2.5 0 0 1 2.46-2.94zm4.96.06A2.5 2.5 0 0 1 17 4.5a2.5 2.5 0 0 1 2.46 2.94 2.5 2.5 0 0 1 0 3.12 3 3 0 0 1 0 3.88 2.5 2.5 0 0 1 0 3.12A2.5 2.5 0 0 1 14.5 20" />
     <path d="M12 5v14" />
+  </svg>
+);
+
+const CustomQuizIcon = ({ size = 20, className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="7" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ width: size, height: size }}
+  >
+    <mask id="home-quiz-icon-mask">
+      <rect width="100" height="100" fill="white" />
+      <rect x="20" y="20" width="8" height="60" rx="4" fill="black" />
+      <circle cx="60" cy="50" r="18" stroke="black" strokeWidth="7" fill="none" />
+      <path d="M 60,37 L 60,50 L 71,50" stroke="black" strokeWidth="7" fill="none" />
+    </mask>
+    <rect x="10" y="10" width="80" height="80" rx="16" fill="currentColor" mask="url(#home-quiz-icon-mask)" />
   </svg>
 );
 
@@ -148,7 +168,7 @@ const DashboardHome = () => {
     {
       title: 'Practice Quiz',
       subtext: 'Test your knowledge',
-      icon: MessageSquare,
+      icon: CustomQuizIcon,
       bg: 'bg-[#FEF6E4]',
       color: 'text-[#D97706]',
     },

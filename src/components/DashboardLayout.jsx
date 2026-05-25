@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  GraduationCap, 
   HelpCircle, 
   MessageSquare, 
   LineChart, 
@@ -61,6 +60,43 @@ const BrandingScaleIcon = ({ size = 18, className }) => (
   </svg>
 );
 
+const CustomQuizIcon = ({ size = 18, className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="7" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ width: size, height: size }}
+  >
+    <mask id="quiz-icon-mask">
+      <rect width="100" height="100" fill="white" />
+      <rect x="20" y="20" width="8" height="60" rx="4" fill="black" />
+      <circle cx="60" cy="50" r="18" stroke="black" strokeWidth="7" fill="none" />
+      <path d="M 60,37 L 60,50 L 71,50" stroke="black" strokeWidth="7" fill="none" />
+    </mask>
+    <rect x="10" y="10" width="80" height="80" rx="16" fill="currentColor" mask="url(#quiz-icon-mask)" />
+  </svg>
+);
+
+const CustomCoursesIcon = ({ size = 18, className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="8" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ width: size, height: size }}
+  >
+    <path d="M 50,30 L 20,20 L 20,70 L 50,80 L 80,70 L 80,20 Z" />
+    <path d="M 50,30 L 50,80" />
+  </svg>
+);
+
 const DashboardLayout = ({ children, title = 'Home' }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -108,8 +144,8 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Cases', path: '/dashboard/cases', icon: BrandingScaleIcon },
-    { name: 'Quiz', path: '/dashboard/quiz', icon: HelpCircle },
-    { name: 'Courses', path: '/dashboard/courses', icon: GraduationCap },
+    { name: 'Quiz', path: '/dashboard/quiz', icon: CustomQuizIcon },
+    { name: 'Courses', path: '/dashboard/courses', icon: CustomCoursesIcon },
     { name: 'Companion', path: '/dashboard/companion', icon: MessageSquare },
     { name: 'Academic Record', path: '/dashboard/records', icon: LineChart },
     { name: 'Help Center', path: '/dashboard/help', icon: HelpCircle },
