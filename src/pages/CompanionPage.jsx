@@ -24,7 +24,7 @@ const CompanionPage = () => {
 
   const tools = [
     {
-      title: 'AI Legal Assistant',
+      title: 'Ask AI',
       description: 'Ask questions, clarify complex legal concepts, and get instant guidance on Ghanaian and common law.',
       icon: Sparkles,
       colorClass: 'text-violet-600 bg-violet-50 border-violet-100',
@@ -112,7 +112,7 @@ const CompanionPage = () => {
           Study Companion Hub
         </h2>
         <p className="text-xs sm:text-sm text-gray-500 font-medium leading-relaxed">
-          Access your digital learning toolbox. Query our intelligent chat assistant, look up legal definitions, research cases, and review your course milestones.
+          Access your digital learning toolbox. Query Ask AI, look up legal definitions, research cases, and review your course milestones.
         </p>
       </div>
 

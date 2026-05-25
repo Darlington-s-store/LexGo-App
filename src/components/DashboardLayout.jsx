@@ -65,7 +65,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
     { name: 'Cases', path: '/dashboard/cases', icon: Scale },
     { name: 'Quiz', path: '/dashboard/quiz', icon: HelpCircle },
     { name: 'Courses', path: '/dashboard/courses', icon: GraduationCap },
-    { name: 'AI Assistant', path: '/dashboard/ai', icon: Sparkles },
+    { name: 'Ask AI', path: '/dashboard/ai', icon: Sparkles },
     { name: 'Companion', path: '/dashboard/companion', icon: MessageSquare },
     { name: 'Academic Record', path: '/dashboard/records', icon: LineChart },
     { name: 'Help Center', path: '/dashboard/help', icon: HelpCircle },

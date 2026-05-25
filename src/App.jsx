@@ -46,7 +46,7 @@ function App() {
         <Route path="/dashboard/companion" element={<DashboardLayout title="Companion"><CompanionPage /></DashboardLayout>} />
         <Route path="/dashboard/records" element={<DashboardLayout title="Academic Record"><RecordsPage /></DashboardLayout>} />
         <Route path="/dashboard/dictionary" element={<DashboardLayout title="Law Dictionary"><DictionaryPage /></DashboardLayout>} />
-        <Route path="/dashboard/ai" element={<DashboardLayout title="AI Assistant"><AiPage /></DashboardLayout>} />
+        <Route path="/dashboard/ai" element={<DashboardLayout title="Ask AI"><AiPage /></DashboardLayout>} />
         <Route path="/dashboard/notes" element={<DashboardLayout title="Notes"><NotesPage /></DashboardLayout>} />
         <Route path="/dashboard/profile" element={<DashboardLayout title="My Profile"><ProfilePage /></DashboardLayout>} />
       </Routes>

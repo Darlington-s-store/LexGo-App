@@ -165,7 +165,7 @@ const AiPage = () => {
               <Sparkles size={15} className="text-[#F59E0B]" />
             </div>
             <div>
-              <h3 className="text-sm font-bold leading-none">AI Legal Assistant</h3>
+              <h3 className="text-sm font-bold leading-none">Ask AI</h3>
               <span className="text-[10px] text-slate-400 font-semibold">Online</span>
             </div>
           </div>
@@ -200,7 +200,7 @@ const AiPage = () => {
               </div>
               
               <div className="space-y-1">
-                <h2 className="text-2xl font-black text-lexgo-dark tracking-tight">AI Legal Assistant</h2>
+                <h2 className="text-2xl font-black text-lexgo-dark tracking-tight">Ask AI</h2>
                 <p className="text-xs sm:text-sm text-gray-500 font-medium">
                   Get instant help with legal concepts and knowledge
                 </p>
