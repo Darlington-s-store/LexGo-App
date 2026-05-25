@@ -244,7 +244,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
         </svg>
         <div>
           <h2 className="text-xl font-bold tracking-tight text-lexgo-dark leading-none">LexGo</h2>
-          <span className="text-[10px] text-gray-400 font-medium tracking-wide">Smart Legal Learning</span>
+          <span className="text-[10px] text-slate-500 font-bold tracking-wide">Smart Legal Learning</span>
         </div>
       </div>
 
@@ -257,13 +257,13 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
             <button
               key={item.name}
               onClick={() => handleNavigation(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition duration-150 cursor-pointer ${
+              className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold rounded-xl transition duration-150 cursor-pointer ${
                 isActive 
-                  ? 'bg-[#1E293B] text-white shadow-sm' 
-                  : 'text-gray-500 hover:text-lexgo-dark hover:bg-gray-50'
+                  ? 'bg-[#0A1128] text-white shadow-sm' 
+                  : 'text-slate-600 hover:text-lexgo-dark hover:bg-slate-50'
               }`}
             >
-              <Icon size={18} className={isActive ? 'text-white' : 'text-gray-400'} />
+              <Icon size={18} className={isActive ? 'text-white' : 'text-slate-500'} />
               {item.name}
             </button>
           );
@@ -272,21 +272,21 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
       {/* Quick Stats (Bottom Sidebar Section) */}
       <div className="p-4 border-t border-gray-100/50">
-        <h3 className="text-xs uppercase tracking-wider text-lexgo-dark font-bold px-2 mb-3">
+        <h3 className="text-xs uppercase tracking-wider text-lexgo-dark font-extrabold px-2 mb-3">
           Quick Stats
         </h3>
         <div className="space-y-2.5 px-2 pb-2">
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500 font-medium">Study Streak</span>
-            <span className="text-[#E27D2C] font-bold">0 days</span>
+            <span className="text-slate-600 font-bold">Study Streak</span>
+            <span className="text-[#E27D2C] font-extrabold">0 days</span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500 font-medium">Cases Studied</span>
-            <span className="text-[#3B82F6] font-bold">0</span>
+            <span className="text-slate-600 font-bold">Cases Studied</span>
+            <span className="text-[#3B82F6] font-extrabold">0</span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500 font-medium">AI Chats</span>
-            <span className="text-[#64748B] font-bold">0</span>
+            <span className="text-slate-600 font-bold">AI Chats</span>
+            <span className="text-[#64748B] font-extrabold">0</span>
           </div>
         </div>
       </div>
