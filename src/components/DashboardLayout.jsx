@@ -3,8 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   HelpCircle, 
-  MessageSquare, 
-  LineChart, 
   LogOut, 
   Bell, 
   User, 
@@ -97,6 +95,43 @@ const CustomCoursesIcon = ({ size = 18, className }) => (
   </svg>
 );
 
+const CustomCompanionIcon = ({ size = 18, className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="7" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ width: size, height: size }}
+  >
+    {/* Outer Wig outline (including curls) */}
+    <path d="M 28,45 C 28,15 72,15 72,45 C 82,45 82,53 72,53 C 82,53 82,61 72,61 C 82,61 82,69 72,69 C 68,75 58,75 58,69" />
+    <path d="M 28,45 C 18,45 18,53 28,53 C 18,53 18,61 28,61 C 18,61 18,69 28,69 C 32,75 42,75 42,69" />
+    
+    {/* Face Cutout outline */}
+    <path d="M 38,42 C 44,42 44,48 50,48 C 56,48 56,42 62,42 L 62,66 L 38,66 Z" />
+  </svg>
+);
+
+const CustomRecordsIcon = ({ size = 18, className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="9" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ width: size, height: size }}
+  >
+    <line x1="32" y1="48" x2="32" y2="82" />
+    <line x1="50" y1="28" x2="50" y2="82" />
+    <line x1="68" y1="60" x2="68" y2="82" />
+  </svg>
+);
+
 const DashboardLayout = ({ children, title = 'Home' }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -146,8 +181,8 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
     { name: 'Cases', path: '/dashboard/cases', icon: BrandingScaleIcon },
     { name: 'Quiz', path: '/dashboard/quiz', icon: CustomQuizIcon },
     { name: 'Courses', path: '/dashboard/courses', icon: CustomCoursesIcon },
-    { name: 'Companion', path: '/dashboard/companion', icon: MessageSquare },
-    { name: 'Academic Record', path: '/dashboard/records', icon: LineChart },
+    { name: 'Companion', path: '/dashboard/companion', icon: CustomCompanionIcon },
+    { name: 'Academic Record', path: '/dashboard/records', icon: CustomRecordsIcon },
     { name: 'Help Center', path: '/dashboard/help', icon: HelpCircle },
   ];
 
