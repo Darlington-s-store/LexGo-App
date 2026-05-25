@@ -218,33 +218,49 @@ const DashboardHome = () => {
                   </p>
                 </div>
 
-                {/* Mpatapo Watermark on the Right */}
+                {/* Logo Watermark on the Right */}
                 <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-end p-6 pointer-events-none z-0">
                   <svg
                     viewBox="0 0 100 100"
                     fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="w-full h-full max-w-[220px] md:max-w-[280px]"
+                    className="w-full h-full max-w-[220px] md:max-w-[280px] text-white/5 opacity-80"
                   >
-                    {/* Rotate the entire knot by 45 degrees to match the mockup */}
-                    <g transform="rotate(45 50 50)">
-                      {/* Thick base stroke in semi-transparent white */}
-                      <path 
-                        d="M 50,50 C 35,30 20,30 20,50 C 20,70 35,70 50,50 C 65,30 80,30 80,50 C 80,70 65,70 50,50 Z M 50,50 C 30,35 30,20 50,20 C 70,20 70,35 50,50 C 30,65 30,80 50,80 C 70,80 70,65 50,50 Z" 
-                        stroke="rgba(255, 255, 255, 0.08)" 
-                        strokeWidth="14" 
-                      />
-                      <circle cx="50" cy="50" r="7" stroke="rgba(255, 255, 255, 0.08)" strokeWidth="14" />
-                      
-                      {/* Thin overlay stroke matching the card background to cut a hollow channel */}
-                      <path 
-                        d="M 50,50 C 35,30 20,30 20,50 C 20,70 35,70 50,50 C 65,30 80,30 80,50 C 80,70 65,70 50,50 Z M 50,50 C 30,35 30,20 50,20 C 70,20 70,35 50,50 C 30,65 30,80 50,80 C 70,80 70,65 50,50 Z" 
-                        stroke="#0A1128" 
-                        strokeWidth="6" 
-                      />
-                      <circle cx="50" cy="50" r="7" stroke="#0A1128" strokeWidth="6" />
-                    </g>
+                    {/* Top Ball */}
+                    <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
+                    
+                    {/* Stem */}
+                    <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
+                    
+                    {/* Crossbeam */}
+                    <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
+                    
+                    {/* Left Hanger Strings */}
+                    <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
+                    
+                    {/* Left Scale Pan */}
+                    <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
+                    
+                    {/* Right Hanger Strings */}
+                    <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
+                    
+                    {/* Right Scale Pan */}
+                    <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
+                    
+                    {/* Pillar */}
+                    <path 
+                      d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" 
+                      fill="currentColor" 
+                    />
+                    
+                    {/* Pedestal Base */}
+                    <path 
+                      d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" 
+                      fill="currentColor" 
+                    />
                   </svg>
                 </div>
               </>
