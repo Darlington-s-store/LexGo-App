@@ -110,7 +110,7 @@ const dailyCards = [
     tag: 'DAILY DICTUM',
     title: 'justice must not only be done, but must be seen to be done.',
     citation: '-Lord Hewart',
-    icon: BrainIcon,
+    icon: Quote,
     bgClass: 'bg-violet-50/40 hover:bg-violet-50/80 border-violet-100/50 text-violet-700',
     iconBg: 'bg-violet-100 text-violet-600',
     summary: '"justice must not only be done, but must be seen to be done." - Lord Hewart in Rex v. Sussex Justices [1924].',
@@ -127,7 +127,7 @@ const dailyCards = [
     tag: 'LEGAL HISTORY',
     title: 'Ghana\'s first Supreme Court',
     citation: 'Aug 18, 1960',
-    icon: BrainIcon,
+    icon: Calendar,
     bgClass: 'bg-amber-50/40 hover:bg-amber-50/80 border-amber-100/50 text-amber-700',
     iconBg: 'bg-amber-100 text-amber-600',
     summary: 'Following the adoption of the Republican Constitution, the Supreme Court of Ghana was established as the nation\'s highest judicial body.',
@@ -204,20 +204,128 @@ const DashboardHome = () => {
     <div className="space-y-6 sm:space-y-8 animate-fade-in">
       {/* Daily Highlights Section */}
       <section>
-        
-        {/* Carousel Card Slider */}
-        <div className="relative w-full">
+        {/* Desktop/Tablet Grid View (>= 768px) */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {dailyCards.map((card) => {
+            const CardIcon = card.icon;
+            return (
+              <div
+                key={card.id}
+                onClick={() => setSelectedCard(card)}
+                className="relative overflow-hidden bg-[#0A1128] text-white rounded-[28px] p-6 h-[300px] flex flex-col justify-between shadow-md border border-slate-900/60 cursor-pointer group transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-fade-in"
+              >
+                {card.id === 'case' && (
+                  <>
+                    <div className="z-10 flex justify-between items-start">
+                      <CardIcon className="w-9 h-9 text-white transition-transform duration-300 group-hover:scale-105" />
+                      <span className="text-[9px] font-extrabold tracking-wider text-sky-400 uppercase bg-sky-950/40 px-2 py-0.5 rounded-full border border-sky-900/30">
+                        {card.tag}
+                      </span>
+                    </div>
+
+                    <div className="z-10 space-y-1.5 mt-auto">
+                      <span className="text-[10px] font-bold text-slate-400 block">
+                        {card.citation}
+                      </span>
+                      <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-sky-300 transition-colors duration-200 line-clamp-2">
+                        {card.title}
+                      </h3>
+                      <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
+                        {card.summary}
+                      </p>
+                    </div>
+
+                    {/* Logo Watermark on the Right */}
+                    <div className="absolute right-[-12px] bottom-[-12px] w-28 h-28 pointer-events-none z-0 opacity-[0.06] text-white">
+                      <CardIcon className="w-full h-full" />
+                    </div>
+                  </>
+                )}
+
+                {card.id === 'term' && (
+                  <>
+                    <div className="z-10 flex justify-between items-start">
+                      <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
+                      <span className="text-[9px] font-extrabold tracking-wider text-emerald-400 uppercase bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-900/30">
+                        {card.tag}
+                      </span>
+                    </div>
+
+                    <div className="z-10 space-y-1.5 mt-auto">
+                      <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-emerald-300 transition-colors duration-200">
+                        {card.title}
+                      </h3>
+                      <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
+                        {card.summary}
+                      </p>
+                      <div className="pt-1.5">
+                        <span className="inline-block px-3 py-1.5 rounded-xl bg-[#101E35] hover:bg-[#1C2C47] text-white text-[10px] font-extrabold border border-slate-800/80 transition duration-200">
+                          See Examples
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {card.id === 'dictum' && (
+                  <>
+                    <div className="z-10 flex justify-between items-start">
+                      <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
+                      <span className="text-[9px] font-extrabold tracking-wider text-violet-400 uppercase bg-violet-950/40 px-2 py-0.5 rounded-full border border-violet-900/30">
+                        {card.tag}
+                      </span>
+                    </div>
+
+                    <div className="z-10 space-y-2 mt-auto">
+                      <p className="text-white text-xs font-bold leading-relaxed italic line-clamp-4">
+                        “{card.title}”
+                      </p>
+                      <span className="block text-slate-400 text-[10px] font-bold">
+                        {card.citation}
+                      </span>
+                    </div>
+                  </>
+                )}
+
+                {card.id === 'history' && (
+                  <>
+                    <div className="z-10 flex justify-between items-start">
+                      <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
+                      <span className="text-[9px] font-extrabold tracking-wider text-amber-400 uppercase bg-amber-950/40 px-2 py-0.5 rounded-full border border-amber-900/30">
+                        {card.tag}
+                      </span>
+                    </div>
+
+                    <div className="z-10 space-y-1.5 mt-auto">
+                      <span className="text-[10px] font-bold text-slate-400 block">
+                        {card.citation}
+                      </span>
+                      <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-amber-300 transition-colors duration-200 line-clamp-2">
+                        {card.title}
+                      </h3>
+                      <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
+                        {card.summary}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile Carousel Slider View (< 768px) */}
+        <div className="relative w-full md:hidden animate-fade-in">
           {/* Card Element */}
           <div
-            key={currentSlide}
             onClick={() => setSelectedCard(activeCard)}
-            className="relative overflow-hidden bg-[#0A1128] text-white rounded-[32px] p-8 min-h-[260px] flex flex-col justify-between shadow-lg border border-slate-900 cursor-pointer group transition-all duration-500 hover:shadow-xl hover:scale-[1.005] animate-fade-in"
+            className="relative overflow-hidden bg-[#0A1128] text-white rounded-[32px] p-8 min-h-[270px] flex flex-col justify-between shadow-lg border border-slate-900 cursor-pointer group transition-all duration-500 hover:shadow-xl hover:scale-[1.005]"
           >
             {activeCard.id === 'case' && (
               <>
                 {/* Top Row: Large Icon */}
                 <div className="z-10">
-                  <CaseIcon className="w-14 h-14 text-white transition-transform duration-300 group-hover:scale-105" />
+                  <ActiveIcon className="w-14 h-14 text-white transition-transform duration-300 group-hover:scale-105" />
                 </div>
 
                 {/* Bottom Row: Text content */}
@@ -249,38 +357,15 @@ const DashboardHome = () => {
                     strokeLinejoin="round"
                     className="w-full h-full max-w-[220px] md:max-w-[280px] text-white/5 opacity-80"
                   >
-                    {/* Top Ball */}
                     <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
-                    
-                    {/* Stem */}
                     <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
-                    
-                    {/* Crossbeam */}
                     <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
-                    
-                    {/* Left Hanger Strings */}
                     <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
-                    
-                    {/* Left Scale Pan */}
                     <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
-                    
-                    {/* Right Hanger Strings */}
                     <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
-                    
-                    {/* Right Scale Pan */}
                     <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
-                    
-                    {/* Pillar */}
-                    <path 
-                      d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" 
-                      fill="currentColor" 
-                    />
-                    
-                    {/* Pedestal Base */}
-                    <path 
-                      d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" 
-                      fill="currentColor" 
-                    />
+                    <path d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" fill="currentColor" />
+                    <path d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" fill="currentColor" />
                   </svg>
                 </div>
               </>
@@ -290,7 +375,7 @@ const DashboardHome = () => {
               <div className="z-10 flex flex-col justify-between h-full w-full py-1">
                 {/* Header Row */}
                 <div className="flex items-center gap-3">
-                  <TermIcon className="w-8 h-8 text-white flex-shrink-0" />
+                  <ActiveIcon className="w-8 h-8 text-white flex-shrink-0" />
                   <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
                     Legal Term of the Day
                   </span>
@@ -321,7 +406,7 @@ const DashboardHome = () => {
               <div className="z-10 flex flex-col justify-between h-full w-full py-1">
                 {/* Header Row */}
                 <div className="flex items-center gap-3">
-                  <BrainIcon className="w-8 h-8 text-white flex-shrink-0" />
+                  <ActiveIcon className="w-8 h-8 text-white flex-shrink-0" />
                   <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
                     Dictum of the Day
                   </span>
@@ -342,7 +427,7 @@ const DashboardHome = () => {
             {activeCard.id === 'history' && (
               <div className="z-10 flex flex-col items-center justify-center text-center h-full w-full py-4">
                 {/* Center Icon */}
-                <BrainIcon className="w-8 h-8 text-white mb-2" />
+                <ActiveIcon className="w-8 h-8 text-white mb-2" />
                 {/* Header Title */}
                 <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
                   Today is Legal in History
