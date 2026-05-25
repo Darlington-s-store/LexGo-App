@@ -8,6 +8,51 @@ import {
   Scale
 } from 'lucide-react';
 
+const OfficialScaleIcon = ({ className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+  >
+    {/* Top Ball */}
+    <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
+    
+    {/* Stem */}
+    <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
+    
+    {/* Crossbeam */}
+    <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
+    
+    {/* Left Hanger Strings */}
+    <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
+    
+    {/* Left Scale Pan */}
+    <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
+    
+    {/* Right Hanger Strings */}
+    <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
+    
+    {/* Right Scale Pan */}
+    <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
+    
+    {/* Pillar */}
+    <path 
+      d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" 
+      fill="currentColor" 
+    />
+    
+    {/* Pedestal Base */}
+    <path 
+      d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" 
+      fill="currentColor" 
+    />
+  </svg>
+);
+
 const CasesPage = () => {
   const [selectedCase, setSelectedCase] = useState(null);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
@@ -60,22 +105,7 @@ const CasesPage = () => {
                     </div>
                     <div className="flex items-center gap-2 pt-2 text-[#EA4335] font-bold text-xs sm:text-sm">
                       {/* Red scale category icon */}
-                      <svg 
-                        className="w-4 h-4 text-[#EA4335]" 
-                        viewBox="0 0 100 100" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="3.5"
-                      >
-                        <circle cx="50" cy="15" r="4" fill="currentColor" />
-                        <line x1="50" y1="19" x2="50" y2="80" strokeWidth="4" />
-                        <line x1="15" y1="26" x2="85" y2="26" strokeWidth="5" />
-                        <path d="M 8,56 L 15,26 L 22,56" strokeWidth="3.5" />
-                        <path d="M 8,56 L 22,56 A 7,6 0 0 1 8,56 Z" fill="currentColor" />
-                        <path d="M 78,56 L 85,26 L 92,56" strokeWidth="3.5" />
-                        <path d="M 78,56 L 92,56 A 7,6 0 0 1 78,56 Z" fill="currentColor" />
-                        <path d="M 30,80 L 70,80" strokeWidth="4" />
-                      </svg>
+                      <OfficialScaleIcon className="w-4 h-4 text-[#EA4335]" />
                       <span>{item.category}</span>
                     </div>
                   </div>
@@ -92,24 +122,7 @@ const CasesPage = () => {
 
                   {/* Faint Scale Watermark */}
                   <div className="absolute right-4 bottom-4 opacity-[0.08] text-lexgo-dark pointer-events-none">
-                    <svg 
-                      className="w-24 h-24 sm:w-32 sm:h-32" 
-                      viewBox="0 0 100 100" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="50" cy="15" r="3" fill="currentColor" />
-                      <line x1="50" y1="18" x2="50" y2="80" strokeWidth="2.5" />
-                      <line x1="18" y1="24" x2="82" y2="24" strokeWidth="3.5" />
-                      <path d="M 10,54 L 18,24 L 26,54" strokeWidth="2" />
-                      <path d="M 10,54 L 26,54 A 8,7 0 0 1 10,54 Z" fill="none" />
-                      <path d="M 74,54 L 82,24 L 90,54" strokeWidth="2" />
-                      <path d="M 74,54 L 90,54 A 8,7 0 0 1 74,54 Z" fill="none" />
-                      <path d="M 32,80 L 68,80" strokeWidth="2.5" />
-                    </svg>
+                    <OfficialScaleIcon className="w-24 h-24 sm:w-32 sm:h-32" />
                   </div>
                 </div>
               ))
@@ -153,24 +166,7 @@ const CasesPage = () => {
             {/* Centered case header info */}
             <div className="text-center space-y-3 pb-4">
               {/* Main scale logo */}
-              <svg 
-                className="w-16 h-16 mx-auto text-lexgo-dark" 
-                viewBox="0 0 100 100" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <circle cx="50" cy="13" r="3.5" fill="currentColor" />
-                <line x1="50" y1="17" x2="50" y2="78" strokeWidth="3" />
-                <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
-                <path d="M 8,54 L 16,24 L 24,54" strokeWidth="2.5" />
-                <path d="M 8,54 L 24,54 A 8,7 0 0 1 8,54 Z" fill="currentColor" />
-                <path d="M 76,54 L 84,24 L 92,54" strokeWidth="2.5" />
-                <path d="M 76,54 L 92,54 A 8,7 0 0 1 76,54 Z" fill="currentColor" />
-                <path d="M 28,78 L 72,78" strokeWidth="3" />
-              </svg>
+              <OfficialScaleIcon className="w-16 h-16 mx-auto text-lexgo-dark" />
               
               <h2 className="text-xl sm:text-2xl font-extrabold text-lexgo-dark max-w-lg mx-auto leading-tight">
                 {selectedCase.title}
