@@ -382,22 +382,22 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                     onClick={() => setIsNotificationsOpen(false)}
                   />
                   {/* Dropdown container */}
-                  <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-xl py-4 px-4 z-50 animate-fade-in text-lexgo-dark flex flex-col gap-3">
-                    <div className="flex justify-between items-center pb-2 border-b border-gray-50">
-                      <h4 className="font-extrabold text-sm text-lexgo-dark">Notifications</h4>
+                  <div className="absolute right-[-72px] sm:right-0 mt-2 w-[280px] sm:w-80 bg-white border border-gray-200 rounded-2xl shadow-xl py-4 px-4 z-50 animate-fade-in flex flex-col gap-3">
+                    <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                      <h4 className="font-black text-sm text-black">Notifications</h4>
                       {notifications.filter(n => n.unread).length > 0 && (
                         <button 
                           onClick={() => {
                             setNotifications(notifications.map(n => ({ ...n, unread: false })));
                           }}
-                          className="text-[10px] font-bold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer bg-transparent border-0"
+                          className="text-[10px] font-extrabold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer bg-transparent border-0"
                         >
                           Mark all as read
                         </button>
                       )}
                     </div>
                     
-                    <div className="flex flex-col divide-y divide-gray-50 max-h-[300px] overflow-y-auto pr-1">
+                    <div className="flex flex-col divide-y divide-gray-100 max-h-[300px] overflow-y-auto pr-1">
                       {notifications.length > 0 ? (
                         notifications.map((notif) => (
                           <div 
@@ -405,26 +405,26 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                             onClick={() => {
                               setNotifications(notifications.map(n => n.id === notif.id ? { ...n, unread: false } : n));
                             }}
-                            className={`py-3 flex flex-col gap-1 transition cursor-pointer select-none ${notif.unread ? 'opacity-100' : 'opacity-60'}`}
+                            className="py-3 flex flex-col gap-1 transition cursor-pointer select-none"
                           >
                             <div className="flex justify-between items-start gap-2">
-                              <span className={`font-bold text-xs ${notif.unread ? 'text-lexgo-dark' : 'text-slate-500'}`}>
+                              <span className="font-extrabold text-xs text-black">
                                 {notif.title}
                               </span>
                               {notif.unread && (
                                 <span className="w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0 mt-1" />
                               )}
                             </div>
-                            <p className="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                            <p className="text-[10px] text-black font-bold leading-relaxed">
                               {notif.desc}
                             </p>
-                            <span className="text-[9px] text-slate-300 font-bold self-start mt-0.5">
+                            <span className="text-[9px] text-black font-bold self-start mt-0.5">
                               {notif.time}
                             </span>
                           </div>
                         ))
                       ) : (
-                        <div className="py-6 text-center text-xs text-gray-400 font-bold">
+                        <div className="py-6 text-center text-xs text-black font-bold">
                           No notifications.
                         </div>
                       )}
