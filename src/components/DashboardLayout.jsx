@@ -268,7 +268,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
         </svg>
         <div>
           <h2 className="text-xl font-bold tracking-tight text-lexgo-dark leading-none">LexGo</h2>
-          <span className="text-[10px] text-slate-500 font-bold tracking-wide">Smart Legal Learning</span>
+          <span className="text-[10px] text-black font-extrabold tracking-wide">Smart Legal Learning</span>
         </div>
       </div>
 
@@ -284,10 +284,10 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
               className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold rounded-xl transition duration-150 cursor-pointer ${
                 isActive 
                   ? 'bg-[#0A1128] text-white shadow-sm' 
-                  : 'text-slate-600 hover:text-lexgo-dark hover:bg-slate-50'
+                  : 'text-black hover:bg-slate-50'
               }`}
             >
-              <Icon size={18} className={isActive ? 'text-white' : 'text-slate-500'} />
+              <Icon size={18} className={isActive ? 'text-white' : 'text-black'} />
               {item.name}
             </button>
           );
@@ -296,20 +296,20 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
       {/* Quick Stats (Bottom Sidebar Section) */}
       <div className="p-4 border-t border-gray-100/50">
-        <h3 className="text-xs uppercase tracking-wider text-lexgo-dark font-extrabold px-2 mb-3">
+        <h3 className="text-xs uppercase tracking-wider text-black font-black px-2 mb-3">
           Quick Stats
         </h3>
         <div className="space-y-2.5 px-2 pb-2">
           <div className="flex justify-between items-center text-sm">
-            <span className="text-slate-600 font-bold">Study Streak</span>
+            <span className="text-black font-extrabold">Study Streak</span>
             <span className="text-[#E27D2C] font-extrabold">0 days</span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="text-slate-600 font-bold">Cases Studied</span>
+            <span className="text-black font-extrabold">Cases Studied</span>
             <span className="text-[#3B82F6] font-extrabold">0</span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="text-slate-600 font-bold">AI Chats</span>
+            <span className="text-black font-extrabold">AI Chats</span>
             <span className="text-[#64748B] font-extrabold">0</span>
           </div>
         </div>
