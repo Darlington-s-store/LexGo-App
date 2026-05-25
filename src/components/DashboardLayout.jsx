@@ -138,6 +138,30 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      title: "Welcome to LexGo!",
+      desc: "Get started with your custom legal companion to learn Ghanaian and common law concepts efficiently.",
+      time: "Just now",
+      unread: true
+    },
+    {
+      id: 2,
+      title: "New Case Added",
+      desc: "Republic v. Mensah [2024] SCGLR 104 is now available inside Landmark Cases.",
+      time: "2 hours ago",
+      unread: true
+    },
+    {
+      id: 3,
+      title: "Streak Reminder",
+      desc: "Don't break your legal streak. Complete a quick practice quiz to maintain your progress!",
+      time: "Yesterday",
+      unread: false
+    }
+  ]);
 
   const [profile, setProfile] = useState(() => {
     try {
@@ -336,10 +360,78 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
           <div className="flex items-center gap-6">
             {/* Alarm bell notification icon */}
-            <div className="relative cursor-pointer hover:opacity-85 transition">
-              <div className="p-2 text-lexgo-dark rounded-full bg-gray-50 hover:bg-gray-100">
+            <div className="relative">
+              <div 
+                onClick={() => {
+                  setIsNotificationsOpen(!isNotificationsOpen);
+                  setIsProfileDropdownOpen(false);
+                }}
+                className="p-2 text-lexgo-dark rounded-full bg-gray-50 hover:bg-gray-100 cursor-pointer relative transition duration-150 active:scale-95 select-none"
+              >
                 <Bell size={20} />
+                {notifications.filter(n => n.unread).length > 0 && (
+                  <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white" />
+                )}
               </div>
+
+              {isNotificationsOpen && (
+                <>
+                  {/* Invisible backdrop to close dropdown on click outside */}
+                  <div 
+                    className="fixed inset-0 z-40 bg-transparent" 
+                    onClick={() => setIsNotificationsOpen(false)}
+                  />
+                  {/* Dropdown container */}
+                  <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-xl py-4 px-4 z-50 animate-fade-in text-lexgo-dark flex flex-col gap-3">
+                    <div className="flex justify-between items-center pb-2 border-b border-gray-50">
+                      <h4 className="font-extrabold text-sm text-lexgo-dark">Notifications</h4>
+                      {notifications.filter(n => n.unread).length > 0 && (
+                        <button 
+                          onClick={() => {
+                            setNotifications(notifications.map(n => ({ ...n, unread: false })));
+                          }}
+                          className="text-[10px] font-bold text-blue-600 hover:text-blue-700 hover:underline cursor-pointer bg-transparent border-0"
+                        >
+                          Mark all as read
+                        </button>
+                      )}
+                    </div>
+                    
+                    <div className="flex flex-col divide-y divide-gray-50 max-h-[300px] overflow-y-auto pr-1">
+                      {notifications.length > 0 ? (
+                        notifications.map((notif) => (
+                          <div 
+                            key={notif.id}
+                            onClick={() => {
+                              setNotifications(notifications.map(n => n.id === notif.id ? { ...n, unread: false } : n));
+                            }}
+                            className={`py-3 flex flex-col gap-1 transition cursor-pointer select-none ${notif.unread ? 'opacity-100' : 'opacity-60'}`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className={`font-bold text-xs ${notif.unread ? 'text-lexgo-dark' : 'text-slate-500'}`}>
+                                {notif.title}
+                              </span>
+                              {notif.unread && (
+                                <span className="w-1.5 h-1.5 bg-blue-600 rounded-full flex-shrink-0 mt-1" />
+                              )}
+                            </div>
+                            <p className="text-[10px] text-gray-400 font-semibold leading-relaxed">
+                              {notif.desc}
+                            </p>
+                            <span className="text-[9px] text-slate-300 font-bold self-start mt-0.5">
+                              {notif.time}
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="py-6 text-center text-xs text-gray-400 font-bold">
+                          No notifications.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Profile badge with dropdown */}
