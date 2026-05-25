@@ -145,6 +145,11 @@ const CasesPage = () => {
           {/* Repeating watermark pattern in the background of the card */}
           <div className="absolute inset-0 pattern-bg opacity-[0.02] pointer-events-none rounded-3xl"></div>
           
+          {/* Faint Scale Watermark in Detail Page Background */}
+          <div className="absolute right-4 bottom-4 opacity-[0.04] text-lexgo-dark pointer-events-none z-0">
+            <OfficialScaleIcon className="w-48 h-48 sm:w-64 sm:h-64" />
+          </div>
+          
           <div className="relative z-10 space-y-6">
             {/* Header row */}
             <div className="flex justify-between items-center">

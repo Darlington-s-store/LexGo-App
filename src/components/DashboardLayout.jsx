@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  Scale, 
   GraduationCap, 
   HelpCircle, 
   MessageSquare, 
@@ -15,6 +14,52 @@ import {
   ChevronDown,
   Sparkles
 } from 'lucide-react';
+
+const BrandingScaleIcon = ({ size = 18, className }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="3.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ width: size, height: size }}
+  >
+    {/* Top Ball */}
+    <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
+    
+    {/* Stem */}
+    <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
+    
+    {/* Crossbeam */}
+    <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
+    
+    {/* Left Hanger Strings */}
+    <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
+    
+    {/* Left Scale Pan */}
+    <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
+    
+    {/* Right Hanger Strings */}
+    <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
+    
+    {/* Right Scale Pan */}
+    <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
+    
+    {/* Pillar */}
+    <path 
+      d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" 
+      fill="currentColor" 
+    />
+    
+    {/* Pedestal Base */}
+    <path 
+      d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" 
+      fill="currentColor" 
+    />
+  </svg>
+);
 
 const DashboardLayout = ({ children, title = 'Home' }) => {
   const navigate = useNavigate();
@@ -62,7 +107,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-    { name: 'Cases', path: '/dashboard/cases', icon: Scale },
+    { name: 'Cases', path: '/dashboard/cases', icon: BrandingScaleIcon },
     { name: 'Quiz', path: '/dashboard/quiz', icon: HelpCircle },
     { name: 'Courses', path: '/dashboard/courses', icon: GraduationCap },
     { name: 'Companion', path: '/dashboard/companion', icon: MessageSquare },
