@@ -399,18 +399,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
               )}
             </div>
 
-            {/* Logout icon */}
-            <div 
-              onClick={() => {
-                setIsNotificationsOpen(false);
-                setIsProfileDropdownOpen(false);
-                handleLogout();
-              }}
-              className="p-2 text-lexgo-dark rounded-full bg-gray-50 hover:bg-red-50 hover:text-red-500 cursor-pointer transition duration-150 active:scale-95 select-none"
-              title="Log out"
-            >
-              <LogOut size={20} />
-            </div>
+
 
             {/* Profile badge with dropdown */}
             <div className="relative">
@@ -436,7 +425,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                     className="fixed inset-0 z-40 bg-transparent" 
                     onClick={() => setIsProfileDropdownOpen(false)}
                   />
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 z-50 animate-fade-in">
+                  <div className="absolute right-0 mt-2 w-52 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 z-50 animate-fade-in">
                     <button
                       onClick={() => {
                         setIsProfileDropdownOpen(false);
@@ -446,6 +435,17 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                     >
                       <User size={16} className="text-gray-400" />
                       <span>My Profile</span>
+                    </button>
+                    <div className="mx-3 my-1 border-t border-gray-100" />
+                    <button
+                      onClick={() => {
+                        setIsProfileDropdownOpen(false);
+                        handleLogout();
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-gray-500 hover:text-red-600 hover:bg-red-50 transition cursor-pointer text-left bg-transparent border-0"
+                    >
+                      <LogOut size={16} className="shrink-0" />
+                      <span>Sign Out</span>
                     </button>
                   </div>
                 </>
