@@ -82,7 +82,7 @@ const FacultyLayout = () => {
           
           {/* Drawer content panel */}
           <aside className="relative w-64 max-w-xs bg-white flex flex-col justify-between h-full p-6 animate-slide-in shadow-2xl">
-            <div className="space-y-8">
+            <div className="space-y-8 overflow-y-auto flex-1">
               {/* Close Button & Logo */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -162,8 +162,8 @@ const FacultyLayout = () => {
       )}
 
       {/* Desktop Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-100 flex flex-col justify-between shrink-0 hidden md:flex h-screen sticky top-0">
-        <div className="p-6 space-y-8">
+      <aside className="w-64 bg-white border-r border-gray-100 flex-col justify-between shrink-0 hidden md:flex h-screen sticky top-0">
+        <div className="p-6 space-y-8 overflow-y-auto flex-1">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-[#0A1128] text-white rounded-xl flex items-center justify-center shrink-0">
