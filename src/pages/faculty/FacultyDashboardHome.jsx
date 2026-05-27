@@ -188,7 +188,7 @@ const FacultyDashboardHome = ({ setTab }) => {
           return (
             <div 
               key={idx} 
-              className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition duration-200 relative overflow-hidden flex items-center justify-between"
+              className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition duration-200 relative overflow-hidden flex items-center justify-between isolate"
             >
               <div className="space-y-1 relative z-10">
                 <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block">{stat.title}</span>
@@ -205,8 +205,10 @@ const FacultyDashboardHome = ({ setTab }) => {
               <div className={`w-14 h-14 ${stat.bgColor} rounded-full flex items-center justify-center relative z-10 ${stat.iconColor}`}>
                 <Icon size={24} />
               </div>
-              {/* Subtle background blob to match mockup style */}
-              <div className={`absolute -right-4 -bottom-4 w-28 h-28 ${stat.overlayColor} rounded-full blur-xl pointer-events-none`} />
+              {/* Decorative blob — isolated so blur stays within the card only */}
+              <div aria-hidden="true" className={`absolute -right-4 -bottom-4 w-28 h-28 ${stat.overlayColor} rounded-full pointer-events-none`}
+                style={{ filter: 'blur(28px)', zIndex: 0 }}
+              />
             </div>
           );
         })}
