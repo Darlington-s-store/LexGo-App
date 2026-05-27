@@ -11,6 +11,7 @@ import {
   ChevronDown,
   Sparkles
 } from 'lucide-react';
+import Logo from './Logo';
 
 const BrandingScaleIcon = ({ size = 18, className }) => (
   <svg 
@@ -172,6 +173,17 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
     }
   });
 
+  const [stats, setStats] = useState(() => {
+    try {
+      const streak = localStorage.getItem('lexgo_stat_streak') || '5 days';
+      const cases = localStorage.getItem('lexgo_stat_cases') || '23';
+      const chats = localStorage.getItem('lexgo_stat_chats') || '47';
+      return { streak, cases, chats };
+    } catch {
+      return { streak: '5 days', cases: '23', chats: '47' };
+    }
+  });
+
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('lexgo_logged_in') === 'true';
     const savedProfile = localStorage.getItem('lexgo_profile');
@@ -223,53 +235,8 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-white text-lexgo-dark">
       {/* Branding Header */}
-      <div className="flex items-center gap-3 px-6 py-6 border-b border-gray-100/50">
-        <svg 
-          className="w-8 h-8 text-lexgo-dark flex-shrink-0" 
-          viewBox="0 0 100 100" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2.5" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          {/* Top Ball */}
-          <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
-          
-          {/* Stem */}
-          <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
-          
-          {/* Crossbeam */}
-          <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
-          
-          {/* Left Hanger Strings */}
-          <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
-          
-          {/* Left Scale Pan */}
-          <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
-          
-          {/* Right Hanger Strings */}
-          <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
-          
-          {/* Right Scale Pan */}
-          <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
-          
-          {/* Pillar */}
-          <path 
-            d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" 
-            fill="currentColor" 
-          />
-          
-          {/* Pedestal Base */}
-          <path 
-            d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" 
-            fill="currentColor" 
-          />
-        </svg>
-        <div>
-          <h2 className="text-xl font-bold tracking-tight text-lexgo-dark leading-none">LexGo</h2>
-          <span className="text-[10px] text-black font-extrabold tracking-wide">Smart Legal Learning</span>
-        </div>
+      <div className="px-4 py-4 border-b border-gray-100/50">
+        <Logo color="#0A1128" textClass="text-lexgo-dark" size="small" />
       </div>
 
       {/* Navigation List */}
@@ -302,15 +269,15 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
         <div className="space-y-2.5 px-2 pb-2">
           <div className="flex justify-between items-center text-sm">
             <span className="text-black font-extrabold">Study Streak</span>
-            <span className="text-[#E27D2C] font-extrabold">0 days</span>
+            <span className="text-[#E27D2C] font-extrabold">{stats.streak}</span>
           </div>
           <div className="flex justify-between items-center text-sm">
             <span className="text-black font-extrabold">Cases Studied</span>
-            <span className="text-[#3B82F6] font-extrabold">0</span>
+            <span className="text-[#3B82F6] font-extrabold">{stats.cases}</span>
           </div>
           <div className="flex justify-between items-center text-sm">
             <span className="text-black font-extrabold">AI Chats</span>
-            <span className="text-[#64748B] font-extrabold">0</span>
+            <span className="text-[#64748B] font-extrabold">{stats.chats}</span>
           </div>
         </div>
       </div>

@@ -15,8 +15,44 @@ import {
   Clock,
   Lock,
   CheckCircle,
-  HelpCircle
+  HelpCircle,
+  Search,
+  SlidersHorizontal,
+  ChevronLeft,
+  ChevronRight,
+  FileText,
+  Calendar,
+  Star,
+  X
 } from 'lucide-react';
+import Logo from '../components/Logo';
+import AssignmentDetailsModal from '../components/AssignmentDetailsModal';
+import TestAndQuizzesView from '../components/TestAndQuizzesView';
+import GradeBookView from '../components/GradeBookView';
+import ResourcesView from '../components/ResourcesView';
+import QAView from '../components/QAView';
+
+const MOCK_ASSIGNMENTS = [
+  { id: 2, title: 'Assignment 2 : Criminal Law', dueDate: 'June 13, 2025', dueTime: '11:59 PM', points: '10 points', status: 'Submitted' },
+  { id: 1, title: 'Assignment 1 : Introdcution to Law', dueDate: 'October 29, 2025', dueTime: '11:59 PM', points: '10 points', status: 'In progress' },
+  { id: 3, title: 'Assignment 3 : Evidence Law', dueDate: 'June 13, 2025', dueTime: '11:59 PM', points: '10 points', status: 'Not started' },
+];
+
+import constitutionalLawImg from '../assets/constitutional_law.png';
+import contractLawImg from '../assets/contract_law.png';
+import criminalLawImg from '../assets/criminal_law.png';
+
+const DISPLAY_COURSES = [
+  { id: 2, displayTitle: 'Constitutional Law', image: constitutionalLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 4, displayTitle: 'Contract Law', image: contractLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 3, displayTitle: 'Criminal Law', image: criminalLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 3, displayTitle: 'Criminal Law', image: criminalLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 2, displayTitle: 'Constitutional Law', image: constitutionalLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 4, displayTitle: 'Contract Law', image: contractLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 4, displayTitle: 'Contract Law', image: contractLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 3, displayTitle: 'Criminal Law', image: criminalLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+  { id: 2, displayTitle: 'Constitutional Law', image: constitutionalLawImg, lessons: '4 Lessons', school: 'University of Ghana School of Law' },
+];
 
 const PREDEFINED_COURSES = [
   { id: 1, title: 'Introduction to Legal Studies', desc: 'Understanding core judicial systems, sources of law, and structures of government.', duration: '4 Lessons' },
@@ -115,28 +151,12 @@ const CURRICULUM_DATABASE = {
     modules: [
       {
         id: 'const_mod1',
-        title: 'Module 1: Supremacy & Separation of Powers',
+        title: 'Constitutional Law Core Modules',
         lessons: [
           {
-            id: 'const_l11',
-            title: 'Lesson 1.1: Constitutional Supremacy',
-            content: 'Constitutional supremacy is a doctrine asserting that the Constitution is the supreme law of the state, taking precedence over all other legal authorities, including legislative bodies and the executive. Under Article 1(2) of Ghana\'s 1992 Constitution, any law or executive action that is inconsistent with any provision of the Constitution is null, void, and of no legal effect. This prevents the legislature from passing unconstitutional laws and ensures the executive operates within defined boundaries. The Supreme Court of Ghana holds the exclusive jurisdiction to interpret the Constitution and declare acts of the legislature or executive unconstitutional under Articles 2 and 130.',
-            cases: [
-              { name: 'Tuffuor v. Attorney-General [1980] GLR 637', summary: 'Reiterated that the constitution is the supreme law of the land, and its provisions are non-negotiable standards to which all state activities must conform.' }
-            ],
-            quiz: {
-              question: 'Which body has the exclusive authority to interpret the Constitution and declare laws unconstitutional in Ghana?',
-              options: [
-                'Parliament',
-                'The Supreme Court',
-                'The Attorney-General'
-              ],
-              answer: 1
-            }
-          },
-          {
             id: 'const_l12',
-            title: 'Lesson 1.2: Separation of Powers',
+            title: 'Separation of Powers',
+            pages: '26 pages',
             content: 'The doctrine of the separation of powers divides the institutions of government into three distinct branches: the Legislative (which makes law), the Executive (which enforces law), and the Judicial (which interprets law). Developed by political theorists like Montesquieu, this structure prevents tyranny by ensuring no single branch commands absolute authority. In practice, modern systems implement "checks and balances" to allow branches to limit one another. For example, in Ghana, the President appoints judges subject to parliamentary approval, and the Judiciary can declare executive acts or legislative bills unconstitutional.',
             cases: [
               { name: 'J.H. Mensah v. Attorney-General [1997] SCGLR 320', summary: 'The Supreme Court ruled on the tenure of ministers from previous administrations, emphasizing that parliamentary approval is an essential check on executive power under the separation of powers.' }
@@ -150,16 +170,11 @@ const CURRICULUM_DATABASE = {
               ],
               answer: 1
             }
-          }
-        ]
-      },
-      {
-        id: 'const_mod2',
-        title: 'Module 2: Fundamental Human Rights',
-        lessons: [
+          },
           {
             id: 'const_l21',
-            title: 'Lesson 2.1: Protection of Personal Liberty (Article 14)',
+            title: 'Fundamental Rights',
+            pages: '25 pages',
             content: 'Article 14 of the 1992 Constitution protects the personal liberty of all individuals. It dictates that no person shall be deprived of their liberty except as authorized by law (e.g. lawful arrest, execution of a court sentence). An arrested person must be informed immediately, in a language they understand, of the reasons for their arrest and their right to remain silent. Furthermore, the "48-hour rule" requires that any person arrested or detained must be brought before a court within 48 hours, failing which they must be released on bail or unconditionally.',
             cases: [
               { name: 'Republic v. Inspector General of Police [2018]', summary: 'An enforcement suit establishing that detaining suspects beyond the 48-hour constitutional limit without a court order is a gross violation of Article 14.' }
@@ -175,8 +190,27 @@ const CURRICULUM_DATABASE = {
             }
           },
           {
+            id: 'const_l11',
+            title: 'Judicial Review',
+            pages: '25 pages',
+            content: 'Constitutional supremacy is a doctrine asserting that the Constitution is the supreme law of the state, taking precedence over all other legal authorities, including legislative bodies and the executive. Under Article 1(2) of Ghana\'s 1992 Constitution, any law or executive action that is inconsistent with any provision of the Constitution is null, void, and of no legal effect. This prevents the legislature from passing unconstitutional laws and ensures the executive operates within defined boundaries. The Supreme Court of Ghana holds the exclusive jurisdiction to interpret the Constitution and declare acts of the legislature or executive unconstitutional under Articles 2 and 130.',
+            cases: [
+              { name: 'Tuffuor v. Attorney-General [1980] GLR 637', summary: 'Reiterated that the constitution is the supreme law of the land, and its provisions are non-negotiable standards to which all state activities must conform.' }
+            ],
+            quiz: {
+              question: 'Which body has the exclusive authority to interpret the Constitution and declare laws unconstitutional in Ghana?',
+              options: [
+                'Parliament',
+                'The Supreme Court',
+                'The Attorney-General'
+              ],
+              answer: 1
+            }
+          },
+          {
             id: 'const_l22',
-            title: 'Lesson 2.2: Enforcement of Rights (Article 33)',
+            title: 'Constitutional Interpretation',
+            pages: '25 pages',
             content: 'The 1992 Constitution does not simply list rights; it provides robust enforcement mechanisms. Under Article 33, any person who claims that any of their fundamental rights has been, is being, or is likely to be contravened in relation to them, may apply to the High Court for redress. The High Court has the power to issue declarations, orders, or writs (such as habeas corpus, mandamus, prohibition) to enforce these rights. Decisions of the High Court in human rights enforcement are appealable to the Court of Appeal and ultimately the Supreme Court.',
             cases: [
               { name: 'Edusei v. Attorney-General [1996] SCGLR 1', summary: 'Dealt with the right to passport and travel, clarifying that the High Court has original jurisdiction for enforcing human rights, rather than the Supreme Court directly under Article 33.' }
@@ -438,6 +472,31 @@ const CoursesPage = () => {
   const [currentView, setCurrentView] = useState('list'); // 'list' | 'syllabus' | 'lesson'
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [selectedLessonId, setSelectedLessonId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [syllabusTab, setSyllabusTab] = useState('Topics');
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
+  const [assignments, setAssignments] = useState(() => {
+    try {
+      const saved = localStorage.getItem('lexgo_assignments');
+      return saved ? JSON.parse(saved) : MOCK_ASSIGNMENTS;
+    } catch {
+      return MOCK_ASSIGNMENTS;
+    }
+  });
+
+  const handleCardClick = (displayCourse) => {
+    const actualCourse = PREDEFINED_COURSES.find(c => c.id === displayCourse.id);
+    if (actualCourse) {
+      const isEnrolled = enrolledCourses.some((c) => c.id === actualCourse.id);
+      if (!isEnrolled) {
+        const updated = [...enrolledCourses, actualCourse];
+        setEnrolledCourses(updated);
+        localStorage.setItem('lexgo_enrolled_courses', JSON.stringify(updated));
+      }
+      setSelectedCourseId(actualCourse.id);
+      setCurrentView('syllabus');
+    }
+  };
 
   // Lesson viewer tab state
   const [activeTab, setActiveTab] = useState('study'); // 'study' | 'cases' | 'quiz'
@@ -657,227 +716,97 @@ const CoursesPage = () => {
     : 0;
 
   return (
-    <div className="space-y-8 pb-16 animate-fade-in">
+    <div className="space-y-8 pb-16 animate-fade-in relative overflow-hidden">
+      
+      {/* App Logo Watermark (interactive easter egg to open simulator) */}
+      <div 
+        onClick={() => setIsSimulatorOpen(prev => !prev)}
+        className="absolute right-4 bottom-4 opacity-[0.03] hover:opacity-10 transition pointer-events-auto cursor-pointer z-50 scale-150"
+        title="Toggle Faculty Simulator"
+      >
+        <Logo color="#0A1128" textClass="text-lexgo-dark" size="small" />
+      </div>
       
       {/* ========================================================================= */}
       {/* SCREEN 1: Academic Courses Home View                                     */}
       {/* ========================================================================= */}
       {currentView === 'list' && (
         <>
-          {/* Header */}
-          <div className="flex flex-col gap-1.5">
-            <h2 className="text-2xl font-black text-black tracking-tight">Academic Courses</h2>
-            <p className="text-xs text-gray-500 font-semibold">Track and advance your study modules</p>
+          {/* Search and Filter Row */}
+          <div className="flex items-center gap-4 mb-8">
+            <div className="relative flex-1 h-12">
+              <input
+                type="text"
+                placeholder="Search Cases..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-full bg-[#EAEAEA] text-[#0A1128] pl-5 pr-12 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-400 font-semibold placeholder-gray-500 text-sm border-0"
+              />
+              <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                <Search size={18} className="text-gray-600" />
+              </div>
+            </div>
+            <button className="bg-[#0A1128] text-white h-12 w-12 rounded-xl hover:bg-slate-800 transition flex items-center justify-center border-0 cursor-pointer flex-shrink-0">
+              <SlidersHorizontal size={20} />
+            </button>
           </div>
 
-          {/* Stats Bar */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
-                <BookOpen size={20} />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Enrolled</span>
-                <span className="text-lg font-black text-black leading-tight">{totalEnrolled}</span>
-              </div>
-            </div>
-
-            <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                <CheckCircle size={20} />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Completed</span>
-                <span className="text-lg font-black text-black leading-tight">{totalCompletedLessons} lessons</span>
-              </div>
-            </div>
-
-            <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
-                <Award size={20} />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Certificates</span>
-                <span className="text-lg font-black text-black leading-tight">{completedCoursesCount} earned</span>
-              </div>
-            </div>
-
-            <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center flex-shrink-0">
-                <Clock size={20} />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">Avg Progress</span>
-                <span className="text-lg font-black text-black leading-tight">{overallAvgProgress}%</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Enrolled Courses Section */}
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-lg font-extrabold text-black">My Enrolled Courses</h3>
-              <p className="text-xs text-gray-400 font-semibold">Courses you are currently pursuing this semester</p>
-            </div>
-
-            {enrolledCourses.length === 0 ? (
-              <div className="flex flex-col items-center justify-center p-8 sm:p-12 bg-slate-50/50 border border-dashed border-slate-200 rounded-3xl text-center max-w-lg mx-auto">
-                <div className="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 mb-4 shadow-inner">
-                  <BookOpen size={24} />
+          {/* Courses Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {DISPLAY_COURSES.filter(course =>
+              course.displayTitle.toLowerCase().includes(searchQuery.toLowerCase())
+            ).map((course, idx) => (
+              <div 
+                key={idx} 
+                onClick={() => handleCardClick(course)}
+                className="bg-white border border-gray-100 rounded-[24px] overflow-hidden shadow-sm hover:shadow-md transition duration-200 cursor-pointer flex flex-col group"
+              >
+                <div className="h-44 w-full overflow-hidden">
+                  <img 
+                    src={course.image} 
+                    alt={course.displayTitle} 
+                    className="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300" 
+                  />
                 </div>
-                <h4 className="text-sm font-extrabold text-black mb-1">No Registered Courses</h4>
-                <p className="text-xs text-gray-500 max-w-xs leading-relaxed mb-6 font-medium">
-                  Your study desk is currently empty. Scroll down to browse and enroll in courses currently mounted on the portal.
-                </p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {enrolledCourses.map((course) => {
-                  const progress = getCourseProgress(course, completedList);
-                  const nextLesson = getNextIncompleteLesson(course);
-                  const lessons = getCourseLessonsList(course);
-                  const completedLessonsInCourse = lessons.filter(l => completedList.includes(l.id)).length;
-                  
-                  return (
-                    <div key={course.id} className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between border-l-4 border-l-[#0A1128]">
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-start gap-3">
-                          <h4 className="text-base font-black text-black tracking-tight leading-tight">{course.title}</h4>
-                          <span className="text-[9px] font-black text-gray-500 bg-slate-100 px-2 py-0.5 rounded-full uppercase flex-shrink-0">
-                            {course.duration}
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-400 leading-relaxed font-semibold">{course.desc}</p>
-                        
-                        {progress < 100 && nextLesson && (
-                          <div className="text-[10px] text-sky-700 bg-sky-50 font-bold inline-block px-2.5 py-1 rounded-lg border border-sky-100">
-                            Next Up: {nextLesson.title}
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="mt-6 pt-4 border-t border-gray-50 space-y-3">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-gray-400 font-bold">Enrolled Progress ({completedLessonsInCourse}/{lessons.length})</span>
-                          <span className="text-black font-black">{progress}%</span>
-                        </div>
-                        <div className="h-2 bg-gray-50 rounded-full overflow-hidden">
-                          <div 
-                            className="h-full bg-[#0A1128] rounded-full transition-all duration-500" 
-                            style={{ width: `${progress}%` }}
-                          ></div>
-                        </div>
-                        <button 
-                          onClick={() => {
-                            setSelectedCourseId(course.id);
-                            setCurrentView('syllabus');
-                          }}
-                          className="w-full text-center py-2.5 mt-2 rounded-xl text-xs font-extrabold border border-slate-900 text-black hover:bg-[#0A1128] hover:text-white transition duration-150 cursor-pointer bg-white"
-                        >
-                          {progress === 100 ? 'Review Syllabus' : progress > 0 ? 'Resume Studying' : 'Start Course'}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* Mounted Portal Section */}
-          <div className="space-y-4 pt-4 border-t border-gray-100">
-            <div>
-              <h3 className="text-lg font-extrabold text-black">Mounted Course Portal</h3>
-              <p className="text-xs text-gray-400 font-semibold">Official curriculum courses currently mounted by the faculty for enrollment</p>
-            </div>
-
-            {mountedCourses.length === 0 ? (
-              <div className="flex flex-col items-center justify-center p-8 sm:p-12 bg-slate-50/50 border border-dashed border-slate-200 rounded-3xl text-center max-w-lg mx-auto">
-                <div className="w-16 h-16 rounded-2xl bg-amber-50/50 flex items-center justify-center text-amber-500 mb-4 shadow-inner">
-                  <Info size={28} />
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div className="space-y-1">
+                    <h4 className="text-[17px] font-black text-black leading-tight tracking-tight">
+                      {course.displayTitle}
+                    </h4>
+                    <p className="text-xs text-gray-500 font-bold">
+                      {course.lessons}
+                    </p>
+                    <p className="text-xs text-gray-400 font-semibold">
+                      {course.school}
+                    </p>
+                  </div>
                 </div>
-                <h4 className="text-sm font-extrabold text-black mb-1">No Courses Mounted</h4>
-                <p className="text-xs text-gray-500 max-w-xs leading-relaxed mb-6 font-medium">
-                  The faculty has not mounted any courses on the portal for this semester yet.
-                </p>
-                <button
-                  onClick={() => setIsSimulatorOpen(true)}
-                  className="text-xs font-bold text-[#E27D2C] hover:underline flex items-center gap-1.5 cursor-pointer"
-                >
-                  <Settings size={14} />
-                  <span>Use Faculty Simulator to mount courses</span>
-                </button>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {mountedCourses.map((course) => {
-                  const isEnrolled = enrolledCourses.some((c) => c.id === course.id);
-                  return (
-                    <div key={course.id} className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between relative overflow-hidden group">
-                      {isEnrolled && (
-                        <div className="absolute top-0 right-0 bg-emerald-50 text-emerald-600 text-[9px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-wider border-l border-b border-emerald-100">
-                          Enrolled
-                        </div>
-                      )}
-                      
-                      <div className="space-y-3">
-                        <h4 className="text-base font-black text-black tracking-tight pr-14 leading-tight">{course.title}</h4>
-                        <p className="text-xs text-gray-400 leading-relaxed font-semibold">{course.desc}</p>
-                        <div className="text-[10px] text-gray-500 font-extrabold bg-slate-50 inline-block px-2.5 py-1 rounded-lg">
-                          Duration: {course.duration}
-                        </div>
-                      </div>
-
-                      <div className="mt-6 pt-4 border-t border-gray-50">
-                        <button
-                          onClick={() => handleEnroll(course)}
-                          disabled={isEnrolled}
-                          className={`w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-extrabold border transition duration-150 cursor-pointer
-                            ${isEnrolled
-                              ? 'bg-emerald-50 border-emerald-100 text-emerald-600 cursor-default'
-                              : 'border-slate-900 text-black hover:bg-slate-900 hover:text-white bg-white'
-                            }`}
-                        >
-                          {isEnrolled ? (
-                            <>
-                              <Check size={14} />
-                              <span>Enrolled & Ready</span>
-                            </>
-                          ) : (
-                            <>
-                              <Plus size={14} />
-                              <span>Enroll in Course</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            ))}
           </div>
 
           {/* Simulated Faculty Panel */}
-          <div className="pt-6 border-t border-gray-200">
-            <div className="bg-[#FAF6F6] rounded-3xl border border-gray-100 overflow-hidden">
-              {/* Accordion Toggle Header */}
-              <button
-                onClick={() => setIsSimulatorOpen(!isSimulatorOpen)}
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-red-50/20 transition cursor-pointer text-left bg-transparent border-0"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Settings className="text-[#E27D2C] w-5 h-5" />
-                  <div>
-                    <h4 className="text-sm font-black text-black">Faculty / Department Simulation Portal</h4>
-                    <p className="text-[11px] text-gray-400 font-semibold">Add or remove courses available for student enrollment</p>
+          {isSimulatorOpen && (
+            <div className="pt-6 border-t border-gray-200 mt-12 animate-fade-in">
+              <div className="bg-[#FAF6F6] rounded-3xl border border-gray-100 overflow-hidden">
+                {/* Header */}
+                <div className="px-6 py-4 flex items-center justify-between bg-red-50/50">
+                  <div className="flex items-center gap-2.5">
+                    <Settings className="text-[#E27D2C] w-5 h-5" />
+                    <div>
+                      <h4 className="text-sm font-black text-black">Faculty / Department Simulation Portal</h4>
+                      <p className="text-[11px] text-gray-400 font-semibold">Add or remove courses available for student enrollment</p>
+                    </div>
                   </div>
+                  <button 
+                    onClick={() => setIsSimulatorOpen(false)}
+                    className="text-xs font-bold text-gray-500 hover:text-black bg-transparent border-0 cursor-pointer"
+                  >
+                    Close
+                  </button>
                 </div>
-                {isSimulatorOpen ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
-              </button>
 
-              {/* Accordion Content */}
-              {isSimulatorOpen && (
+                {/* Content */}
                 <div className="px-6 pb-6 pt-2 border-t border-gray-100/50 space-y-6">
                   {/* Predefined Course List */}
                   <div className="space-y-3">
@@ -990,16 +919,16 @@ const CoursesPage = () => {
                   <div className="flex justify-end">
                     <button
                       onClick={handleResetSimulator}
-                      className="bg-red-550/10 hover:bg-red-100 text-red-600 px-4 py-2.5 rounded-xl text-xs font-extrabold transition flex items-center gap-1.5 cursor-pointer bg-red-50 border-0"
+                      className="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2.5 rounded-xl text-xs font-extrabold transition flex items-center gap-1.5 cursor-pointer border-0"
                     >
                       <Trash2 size={14} />
                       <span>Reset All Simulator Data</span>
                     </button>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
 
@@ -1008,151 +937,192 @@ const CoursesPage = () => {
       {/* ========================================================================= */}
       {currentView === 'syllabus' && selectedCourse && (
         <div className="space-y-6 max-w-4xl mx-auto">
-          {/* Back Navigation */}
-          <button 
-            onClick={() => {
-              setCurrentView('list');
-              setSelectedCourseId(null);
-            }}
-            className="flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-black transition bg-transparent border-0 cursor-pointer"
-          >
-            <ArrowLeft size={16} />
-            <span>Back to Dashboard</span>
-          </button>
-
-          {/* Course Banner */}
-          <div className="bg-[#0A1128] text-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-900/60 relative overflow-hidden">
-            <div className="z-10 relative space-y-4">
-              <span className="text-[10px] font-black text-sky-400 bg-sky-950/40 border border-sky-900/30 px-3 py-1 rounded-full uppercase tracking-wider">
-                COURSE SYLLABUS
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black tracking-tight leading-tight">{selectedCourse.title}</h2>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl font-medium leading-relaxed">{selectedCourse.desc}</p>
-              
-              <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex-grow max-w-xs space-y-2">
-                  <div className="flex justify-between text-xs font-bold text-slate-300">
-                    <span>Syllabus Completion</span>
-                    <span>{getCourseProgress(selectedCourse, completedList)}%</span>
-                  </div>
-                  <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-sky-400 rounded-full transition-all duration-500"
-                      style={{ width: `${getCourseProgress(selectedCourse, completedList)}%` }}
-                    />
-                  </div>
-                </div>
-
-                <button 
-                  onClick={() => {
-                    const next = getNextIncompleteLesson(selectedCourse);
-                    if (next) {
-                      setSelectedLessonId(next.id);
-                      setActiveTab('study');
-                      setQuizAnswer(null);
-                      setQuizSubmitted(completedList.includes(next.id));
-                      setQuizError(false);
-                      setCurrentView('lesson');
-                    }
-                  }}
-                  className="px-6 py-2.5 bg-white text-black hover:bg-gray-100 rounded-xl text-xs font-black transition cursor-pointer flex items-center justify-center gap-1.5 border-0"
-                >
-                  <BookOpen size={15} />
-                  <span>{getCourseProgress(selectedCourse, completedList) === 0 ? 'Start Learning' : getCourseProgress(selectedCourse, completedList) === 100 ? 'Review Lessons' : 'Resume Learning'}</span>
-                </button>
-              </div>
-            </div>
-            
-            {/* Watermark decoration */}
-            <div className="absolute right-[-20px] bottom-[-20px] w-48 h-48 opacity-[0.04] pointer-events-none">
-              <Book className="w-full h-full text-white" />
-            </div>
+          {/* Header Row with Back Button and Title */}
+          <div className="flex items-center gap-4 mb-8">
+            <button 
+              onClick={() => {
+                setCurrentView('list');
+                setSelectedCourseId(null);
+              }}
+              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition cursor-pointer flex-shrink-0 bg-white"
+            >
+              <ChevronLeft size={18} className="text-black" />
+            </button>
+            <h2 className="text-2xl font-black text-black tracking-tight">{selectedCourse.title}</h2>
           </div>
 
-          {/* Module List */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-black text-black">Course Modules</h3>
-            
-            {getCourseModules(selectedCourse).map((module, index) => (
-              <div key={module.id} className="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm space-y-3">
-                <div className="flex items-center gap-2 border-b border-gray-50 pb-2">
-                  <span className="w-2.5 h-2.5 bg-[#0A1128] rounded-full" />
-                  <h4 className="text-sm font-black text-black uppercase tracking-wider">{module.title || `Module ${index + 1}`}</h4>
-                </div>
+          {/* Syllabus Tabs Row */}
+          <div className="flex border-b border-gray-200 mb-8 overflow-x-auto gap-8 text-sm no-scrollbar">
+            {['Topics', 'Assignments', 'Test&Quizzes', 'GradeBook', 'Resources', 'Q&A'].map((tab) => {
+              const isActive = syllabusTab === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setSyllabusTab(tab)}
+                  className={`pb-2.5 font-bold transition whitespace-nowrap bg-transparent border-0 cursor-pointer text-sm
+                    ${isActive 
+                      ? 'border-b-[3px] border-black text-black font-extrabold' 
+                      : 'text-gray-400 hover:text-black border-b-[3px] border-transparent'
+                    }`}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
 
-                <div className="flex flex-col divide-y divide-gray-50">
-                  {module.lessons.map((lesson) => {
-                    const isCompleted = completedList.includes(lesson.id);
-                    const isUnlocked = isLessonUnlocked(selectedCourse, lesson.id, completedList);
+          {/* Tab Content Panels */}
+          {syllabusTab === 'Topics' ? (
+            <div className="space-y-8">
+              {/* Course Cover Card with Metadata Text Overlay */}
+              {(() => {
+                const courseDisplayInfo = DISPLAY_COURSES.find(c => c.id === selectedCourse.id) || { image: constitutionalLawImg };
+                const lessons = getCourseLessonsList(selectedCourse);
+                return (
+                  <div className="relative w-full max-w-[360px] h-[240px] rounded-[24px] overflow-hidden shadow-sm">
+                    <img src={courseDisplayInfo.image} alt={selectedCourse.title} className="w-full h-full object-cover" />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+                    {/* Text Overlay */}
+                    <div className="absolute bottom-5 left-5 text-white pr-4">
+                      <h3 className="text-[17px] font-black leading-tight tracking-tight mb-1">{selectedCourse.title}</h3>
+                      <p className="text-xs font-bold opacity-90">{lessons.length} Lessons</p>
+                      <p className="text-[10px] font-semibold opacity-75">University of Ghana School of Law</p>
+                    </div>
+                  </div>
+                );
+              })()}
 
-                    return (
-                      <div 
-                        key={lesson.id}
-                        onClick={() => {
-                          if (isUnlocked) {
-                            setSelectedLessonId(lesson.id);
-                            setActiveTab('study');
-                            setQuizAnswer(null);
-                            setQuizSubmitted(isCompleted);
-                            setQuizError(false);
-                            setCurrentView('lesson');
-                          }
-                        }}
-                        className={`py-3 flex items-center justify-between gap-4 transition select-none ${
-                          isUnlocked 
-                            ? 'cursor-pointer hover:bg-slate-50/50' 
-                            : 'cursor-not-allowed opacity-50'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="flex-shrink-0">
-                            {isCompleted ? (
-                              <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
-                                <Check size={16} strokeWidth={3} />
-                              </div>
-                            ) : isUnlocked ? (
-                              <div className="w-8 h-8 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center border border-sky-100">
-                                <BookOpen size={16} />
-                              </div>
-                            ) : (
-                              <div className="w-8 h-8 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center border border-gray-200">
-                                <Lock size={14} />
-                              </div>
-                            )}
-                          </div>
-                          
-                          <div>
-                            <span className={`text-xs font-extrabold ${isUnlocked ? 'text-black' : 'text-gray-400'}`}>
-                              {lesson.title}
-                            </span>
-                            <span className="text-[10px] text-gray-400 block font-semibold leading-relaxed max-w-[280px] sm:max-w-md line-clamp-1">
-                              {lesson.content.slice(0, 90)}...
-                            </span>
-                          </div>
-                        </div>
+              {/* Topics Numbered List */}
+              <div className="space-y-4">
+                {getCourseLessonsList(selectedCourse).map((lesson, idx) => {
+                  const isCompleted = completedList.includes(lesson.id);
+                  const isUnlocked = isLessonUnlocked(selectedCourse, lesson.id, completedList);
+                  const pageCount = lesson.pages || '25 pages';
 
+                  return (
+                    <div 
+                      key={lesson.id}
+                      onClick={() => {
+                        if (isUnlocked) {
+                          setSelectedLessonId(lesson.id);
+                          setActiveTab('study');
+                          setQuizAnswer(null);
+                          setQuizSubmitted(isCompleted);
+                          setQuizError(false);
+                          setCurrentView('lesson');
+                        }
+                      }}
+                      className={`bg-white border border-gray-100 rounded-[20px] px-6 py-4.5 shadow-sm transition flex justify-between items-center select-none ${
+                        isUnlocked 
+                          ? 'cursor-pointer hover:border-gray-300 hover:shadow-md' 
+                          : 'opacity-50 cursor-not-allowed'
+                      }`}
+                    >
+                      <div className="flex items-center gap-5">
+                        {/* Index Number */}
+                        <span className="text-base font-black text-black w-4 flex-shrink-0">
+                          {idx + 1}
+                        </span>
+                        
                         <div>
-                          {isCompleted ? (
-                            <span className="text-[9px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 uppercase">
-                              Passed
-                            </span>
-                          ) : isUnlocked ? (
-                            <span className="text-[9px] font-black text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-100 uppercase">
-                              Study
-                            </span>
+                          <h4 className="text-sm font-black text-black leading-snug tracking-tight">
+                            {lesson.title}
+                          </h4>
+                          <p className="text-xs text-gray-400 font-semibold mt-0.5">
+                            {pageCount}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        {isCompleted && (
+                          <span className="text-[9px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 uppercase">
+                            Passed
+                          </span>
+                        )}
+                        <div className="w-8 h-8 rounded-full bg-[#0A1128] text-white flex items-center justify-center hover:bg-slate-800 transition flex-shrink-0 shadow-sm">
+                          {isUnlocked ? (
+                            <ChevronRight size={14} strokeWidth={3} />
                           ) : (
-                            <span className="text-[9px] font-black text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full border border-gray-200 uppercase">
-                              Locked
-                            </span>
+                            <Lock size={12} className="text-gray-400" />
                           )}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
-          </div>
+            </div>
+          ) : syllabusTab === 'Assignments' ? (
+            <div className="space-y-4 font-sans">
+              {assignments.map((assignment) => (
+                <div 
+                  key={assignment.id}
+                  onClick={() => setSelectedAssignment(assignment)}
+                  className="bg-white border border-gray-100 rounded-[20px] p-6 shadow-sm flex justify-between items-start select-none cursor-pointer hover:border-gray-300 hover:shadow-md transition duration-150"
+                >
+                  <div className="flex gap-4">
+                    {/* Document Icon wrapper */}
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50/70 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <FileText size={20} />
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <h4 className="text-sm sm:text-base font-black text-black leading-snug tracking-tight">
+                        {assignment.title}
+                      </h4>
+                      
+                      <div className="flex flex-col gap-1.5 text-xs text-gray-400 font-semibold">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar size={13} className="text-gray-400" />
+                          <span>Due {assignment.dueDate}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Clock size={13} className="text-gray-400" />
+                          <span>{assignment.dueTime}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Star size={13} className="text-gray-400" />
+                          <span>{assignment.points}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Status Badge */}
+                  <span className={`px-3 py-1 rounded-full text-[10px] font-black tracking-wider uppercase border
+                    ${assignment.status === 'Submitted' 
+                      ? 'bg-rose-50 text-rose-500 border-rose-100/50' 
+                      : assignment.status === 'In progress' 
+                      ? 'bg-red-50 text-red-500 border-red-100/50' 
+                      : 'bg-amber-50 text-amber-600 border-amber-100/50'
+                    }`}
+                  >
+                    {assignment.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : syllabusTab === 'Test&Quizzes' ? (
+            <TestAndQuizzesView />
+          ) : syllabusTab === 'GradeBook' ? (
+            <GradeBookView />
+          ) : syllabusTab === 'Resources' ? (
+            <ResourcesView course={selectedCourse} />
+          ) : syllabusTab === 'Q&A' ? (
+            <QAView course={selectedCourse} />
+          ) : (
+            <div className="bg-white border border-gray-100 rounded-3xl p-12 text-center max-w-lg mx-auto shadow-sm flex flex-col items-center justify-center space-y-4">
+              <div className="w-14 h-14 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center shadow-inner">
+                <BookOpen size={24} />
+              </div>
+              <h4 className="text-sm font-black text-black">{syllabusTab} is empty</h4>
+              <p className="text-xs text-gray-500 leading-relaxed font-semibold max-w-xs">
+                There are currently no items posted in the {syllabusTab} section for this course yet. Check back later!
+              </p>
+            </div>
+          )}
         </div>
       )}
 
@@ -1222,7 +1192,7 @@ const CoursesPage = () => {
                     : 'border-transparent text-gray-400 hover:text-black'
                 }`}
               >
-                ❓ Self-Assessment
+                ✓ Self-Assessment
               </button>
             </div>
 
@@ -1239,10 +1209,10 @@ const CoursesPage = () => {
                   </div>
                   
                   {/* Styled Note Box */}
-                  <div className="p-4 bg-indigo-50/50 border border-indigo-100 rounded-2xl flex gap-3 mt-8">
-                    <Info className="text-indigo-600 flex-shrink-0 mt-0.5" size={18} />
-                    <div className="text-xs text-indigo-900 leading-relaxed font-semibold">
-                      <span className="font-black block mb-0.5 text-indigo-950">Study Tip:</span>
+                  <div className="p-4 bg-[#FAF6F6] border border-red-50/50 rounded-2xl flex gap-3 mt-8">
+                    <Info className="text-gray-400 flex-shrink-0 mt-0.5" size={18} />
+                    <div className="text-xs text-gray-500 leading-relaxed font-semibold">
+                      <span className="font-black block mb-0.5 text-black">Study Tip:</span>
                       Read the case citations carefully to see how judges apply this theoretical concept to resolve real-world conflicts.
                     </div>
                   </div>
@@ -1260,7 +1230,7 @@ const CoursesPage = () => {
                           <span>Landmark Case Citation</span>
                         </div>
                         <h4 className="text-sm sm:text-base font-black text-black italic tracking-tight">{caseRef.name}</h4>
-                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-semibold">{caseRef.summary}</p>
+                        <p className="text-xs sm:text-sm text-gray-650 leading-relaxed font-semibold">{caseRef.summary}</p>
                         
                         {/* Scale Background Stamp */}
                         <div className="absolute right-[-10px] bottom-[-10px] w-20 h-20 opacity-[0.03] pointer-events-none">
@@ -1402,6 +1372,26 @@ const CoursesPage = () => {
             })()}
           </div>
         </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* SCREEN 4: Assignment Details Modal Overlay                                */}
+      {/* ========================================================================= */}
+      {selectedAssignment && (
+        <AssignmentDetailsModal 
+          assignment={assignments.find(a => a.id === selectedAssignment.id) || selectedAssignment} 
+          onClose={() => setSelectedAssignment(null)} 
+          onSubmit={(assignmentId) => {
+            const updated = assignments.map(a => {
+              if (a.id === assignmentId) {
+                return { ...a, status: 'Submitted' };
+              }
+              return a;
+            });
+            setAssignments(updated);
+            localStorage.setItem('lexgo_assignments', JSON.stringify(updated));
+          }}
+        />
       )}
     </div>
   );

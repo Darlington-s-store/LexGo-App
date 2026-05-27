@@ -69,76 +69,7 @@ const CustomQuizIcon = ({ size = 20, className }) => (
   </svg>
 );
 
-const dailyCards = [
-  {
-    id: 'case',
-    type: 'Case of the Day',
-    tag: 'DAILY CASE',
-    title: 'Republic v. Mensah',
-    citation: '[2024] SCGLR 104',
-    icon: CaseIcon,
-    bgClass: 'bg-indigo-50/40 hover:bg-indigo-50/80 border-indigo-100/50 text-indigo-700',
-    iconBg: 'bg-indigo-100 text-indigo-600',
-    summary: 'Evaluating the constitutional limits of search and seizure without judicial warrants.',
-    details: {
-      title: 'Republic v. Mensah [2024] SCGLR 104',
-      subtitle: 'Landmark ruling on warrantless searches and personal privacy',
-      content: 'The Supreme Court of Ghana evaluated the constitutional boundaries of search and seizure under Article 18(2) of the 1992 Constitution. The court ruled that searches conducted by law enforcement officers without a judicially authorized warrant are prima facie unlawful, unless they fall strictly within recognized emergency or exigent circumstances.',
-      significance: 'This case solidified the protection of privacy rights in Ghana, establishing clear boundaries for law enforcement and reinforcing that constitutional protections override general police administrative convenience.'
-    }
-  },
-  {
-    id: 'term',
-    type: 'Legal Term of the Day',
-    tag: 'DAILY TERM',
-    title: 'Estoppe/',
-    citation: 'Principle of Law',
-    icon: TermIcon,
-    bgClass: 'bg-emerald-50/40 hover:bg-emerald-50/80 border-emerald-100/50 text-emerald-700',
-    iconBg: 'bg-emerald-100 text-emerald-600',
-    summary: 'A legal principle that prevents someone from arguing something contrary to a fact, or claim they previously accepted, especially if others have relied on it.',
-    details: {
-      title: 'Estoppel',
-      subtitle: 'The rule of consistency in legal claims',
-      content: 'Estoppel is a judicial doctrine under common law and equity that precludes a person from asserting a fact, right, or claim that is inconsistent with a position they previously took, especially when another party has relied on their initial representation and acted upon it to their detriment.',
-      significance: 'Promotes fairness and predictability in legal transactions and representations, ensuring that individuals cannot gain an unfair advantage by shifting their stories.'
-    }
-  },
-  {
-    id: 'dictum',
-    type: 'Dictum of the Day',
-    tag: 'DAILY DICTUM',
-    title: 'justice must not only be done, but must be seen to be done.',
-    citation: '-Lord Hewart',
-    icon: Quote,
-    bgClass: 'bg-violet-50/40 hover:bg-violet-50/80 border-violet-100/50 text-violet-700',
-    iconBg: 'bg-violet-100 text-violet-600',
-    summary: '"justice must not only be done, but must be seen to be done." - Lord Hewart in Rex v. Sussex Justices [1924].',
-    details: {
-      title: 'justice must not only be done, but must be seen to be done.',
-      subtitle: 'Lord Hewart (Rex v. Sussex Justices [1924])',
-      content: 'This celebrated legal maxim emphasizes that the appearance of justice is as important as the substance of it. Even if a court renders a completely fair decision, the trial must be conducted under circumstances free from any reasonable suspicion of bias, conflict of interest, or procedural unfairness.',
-      significance: 'Ensures absolute public confidence in the administration of justice and establishes that the mere possibility of bias is enough to overturn a judicial decision.'
-    }
-  },
-  {
-    id: 'history',
-    type: 'Today is Legal in History',
-    tag: 'LEGAL HISTORY',
-    title: 'Ghana\'s first Supreme Court',
-    citation: 'Aug 18, 1960',
-    icon: Calendar,
-    bgClass: 'bg-amber-50/40 hover:bg-amber-50/80 border-amber-100/50 text-amber-700',
-    iconBg: 'bg-amber-100 text-amber-600',
-    summary: 'Following the adoption of the Republican Constitution, the Supreme Court of Ghana was established as the nation\'s highest judicial body.',
-    details: {
-      title: 'Ghana\'s First Supreme Court Established',
-      subtitle: 'August 18, 1960',
-      content: 'With the enactment of the Republican Constitution of 1960, the Supreme Court of Ghana was formally constituted as the highest court of record and final court of appeal, replacing the jurisdiction of the Judicial Committee of the Privy Council in London and marking full legal sovereignty.',
-      significance: 'This historic establishment solidified Ghana\'s constitutional independence, making its judiciary fully sovereign and independent of colonial legal authorities.'
-    }
-  }
-];
+const dailyCards = [];
 
 const DashboardHome = () => {
   const navigate = useNavigate();
@@ -198,271 +129,254 @@ const DashboardHome = () => {
   const recentActivities = [];
 
   const activeCard = dailyCards[currentSlide];
-  const ActiveIcon = activeCard.icon;
+  const ActiveIcon = activeCard?.icon;
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-fade-in">
       {/* Daily Highlights Section */}
       <section>
         {/* Desktop/Tablet Grid View (>= 768px) */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {dailyCards.map((card) => {
-            const CardIcon = card.icon;
-            return (
-              <div
-                key={card.id}
-                onClick={() => setSelectedCard(card)}
-                className="relative overflow-hidden bg-[#0A1128] text-white rounded-[28px] p-6 h-[300px] flex flex-col justify-between shadow-md border border-slate-900/60 cursor-pointer group transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-fade-in"
-              >
-                {card.id === 'case' && (
-                  <>
-                    <div className="z-10 flex justify-between items-start">
-                      <CardIcon className="w-9 h-9 text-white transition-transform duration-300 group-hover:scale-105" />
-                      <span className="text-[9px] font-extrabold tracking-wider text-sky-400 uppercase bg-sky-950/40 px-2 py-0.5 rounded-full border border-sky-900/30">
-                        {card.tag}
-                      </span>
-                    </div>
-
-                    <div className="z-10 space-y-1.5 mt-auto">
-                      <span className="text-[10px] font-bold text-slate-400 block">
-                        {card.citation}
-                      </span>
-                      <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-sky-300 transition-colors duration-200 line-clamp-2">
-                        {card.title}
-                      </h3>
-                      <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
-                        {card.summary}
-                      </p>
-                    </div>
-
-                    {/* Logo Watermark on the Right */}
-                    <div className="absolute right-[-12px] bottom-[-12px] w-28 h-28 pointer-events-none z-0 opacity-[0.06] text-white">
-                      <CardIcon className="w-full h-full" />
-                    </div>
-                  </>
-                )}
-
-                {card.id === 'term' && (
-                  <>
-                    <div className="z-10 flex justify-between items-start">
-                      <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
-                      <span className="text-[9px] font-extrabold tracking-wider text-emerald-400 uppercase bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-900/30">
-                        {card.tag}
-                      </span>
-                    </div>
-
-                    <div className="z-10 space-y-1.5 mt-auto">
-                      <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-emerald-300 transition-colors duration-200">
-                        {card.title}
-                      </h3>
-                      <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
-                        {card.summary}
-                      </p>
-                      <div className="pt-1.5">
-                        <span className="inline-block px-3 py-1.5 rounded-xl bg-[#101E35] hover:bg-[#1C2C47] text-white text-[10px] font-extrabold border border-slate-800/80 transition duration-200">
-                          See Examples
+        {dailyCards.length > 0 ? (
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {dailyCards.map((card) => {
+              const CardIcon = card.icon;
+              return (
+                <div
+                  key={card.id}
+                  onClick={() => setSelectedCard(card)}
+                  className="relative overflow-hidden bg-[#0A1128] text-white rounded-[28px] p-6 h-[300px] flex flex-col justify-between shadow-md border border-slate-900/60 cursor-pointer group transition-all duration-300 hover:shadow-xl hover:scale-[1.02] animate-fade-in"
+                >
+                  {card.id === 'case' && (
+                    <>
+                      <div className="z-10 flex justify-between items-start">
+                        <CardIcon className="w-9 h-9 text-white transition-transform duration-300 group-hover:scale-105" />
+                        <span className="text-[9px] font-extrabold tracking-wider text-sky-400 uppercase bg-sky-950/40 px-2 py-0.5 rounded-full border border-sky-900/30">
+                          {card.tag}
                         </span>
                       </div>
-                    </div>
-                  </>
-                )}
 
-                {card.id === 'dictum' && (
-                  <>
-                    <div className="z-10 flex justify-between items-start">
-                      <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
-                      <span className="text-[9px] font-extrabold tracking-wider text-violet-400 uppercase bg-violet-950/40 px-2 py-0.5 rounded-full border border-violet-900/30">
-                        {card.tag}
-                      </span>
-                    </div>
+                      <div className="z-10 space-y-1.5 mt-auto">
+                        <span className="text-[10px] font-bold text-slate-400 block">
+                          {card.citation}
+                        </span>
+                        <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-sky-300 transition-colors duration-200 line-clamp-2">
+                          {card.title}
+                        </h3>
+                        <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
+                          {card.summary}
+                        </p>
+                      </div>
 
-                    <div className="z-10 space-y-2 mt-auto">
-                      <p className="text-white text-xs font-bold leading-relaxed italic line-clamp-4">
-                        “{card.title}”
-                      </p>
-                      <span className="block text-slate-400 text-[10px] font-bold">
-                        {card.citation}
-                      </span>
-                    </div>
-                  </>
-                )}
+                      {/* Logo Watermark on the Right */}
+                      <div className="absolute right-[-12px] bottom-[-12px] w-28 h-28 pointer-events-none z-0 opacity-[0.06] text-white">
+                        <CardIcon className="w-full h-full" />
+                      </div>
+                    </>
+                  )}
 
-                {card.id === 'history' && (
-                  <>
-                    <div className="z-10 flex justify-between items-start">
-                      <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
-                      <span className="text-[9px] font-extrabold tracking-wider text-amber-400 uppercase bg-amber-950/40 px-2 py-0.5 rounded-full border border-amber-900/30">
-                        {card.tag}
-                      </span>
-                    </div>
+                  {card.id === 'term' && (
+                    <>
+                      <div className="z-10 flex justify-between items-start">
+                        <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
+                        <span className="text-[9px] font-extrabold tracking-wider text-emerald-400 uppercase bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-900/30">
+                          {card.tag}
+                        </span>
+                      </div>
 
-                    <div className="z-10 space-y-1.5 mt-auto">
-                      <span className="text-[10px] font-bold text-slate-400 block">
-                        {card.citation}
-                      </span>
-                      <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-amber-300 transition-colors duration-200 line-clamp-2">
-                        {card.title}
-                      </h3>
-                      <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
-                        {card.summary}
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            );
-          })}
-        </div>
+                      <div className="z-10 space-y-1.5 mt-auto">
+                        <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-emerald-300 transition-colors duration-200">
+                          {card.title}
+                        </h3>
+                        <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
+                          {card.summary}
+                        </p>
+                        <div className="pt-1.5">
+                          <span className="inline-block px-3 py-1.5 rounded-xl bg-[#101E35] hover:bg-[#1C2C47] text-white text-[10px] font-extrabold border border-slate-800/80 transition duration-200">
+                            See Examples
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {card.id === 'dictum' && (
+                    <>
+                      <div className="z-10 flex justify-between items-start">
+                        <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
+                        <span className="text-[9px] font-extrabold tracking-wider text-violet-400 uppercase bg-violet-950/40 px-2 py-0.5 rounded-full border border-violet-900/30">
+                          {card.tag}
+                        </span>
+                      </div>
+
+                      <div className="z-10 space-y-2 mt-auto">
+                        <p className="text-white text-xs font-bold leading-relaxed italic line-clamp-4">
+                          “{card.title}”
+                        </p>
+                        <span className="block text-slate-400 text-[10px] font-bold">
+                          {card.citation}
+                        </span>
+                      </div>
+                    </>
+                  )}
+
+                  {card.id === 'history' && (
+                    <>
+                      <div className="z-10 flex justify-between items-start">
+                        <CardIcon className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-105" />
+                        <span className="text-[9px] font-extrabold tracking-wider text-amber-400 uppercase bg-amber-950/40 px-2 py-0.5 rounded-full border border-amber-900/30">
+                          {card.tag}
+                        </span>
+                      </div>
+
+                      <div className="z-10 space-y-1.5 mt-auto">
+                        <span className="text-[10px] font-bold text-slate-400 block">
+                          {card.citation}
+                        </span>
+                        <h3 className="text-lg font-black tracking-tight text-white leading-snug group-hover:text-amber-300 transition-colors duration-200 line-clamp-2">
+                          {card.title}
+                        </h3>
+                        <p className="text-slate-300 text-[11px] leading-relaxed font-medium line-clamp-3">
+                          {card.summary}
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="hidden md:block text-center py-6 text-gray-400 font-medium text-sm">
+            No daily highlights yet. Check back later.
+          </div>
+        )}
 
         {/* Mobile Carousel Slider View (< 768px) */}
-        <div className="relative w-full md:hidden animate-fade-in">
-          {/* Card Element */}
-          <div
-            onClick={() => setSelectedCard(activeCard)}
-            className="relative overflow-hidden bg-[#0A1128] text-white rounded-[32px] p-8 min-h-[270px] flex flex-col justify-between shadow-lg border border-slate-900 cursor-pointer group transition-all duration-500 hover:shadow-xl hover:scale-[1.005]"
-          >
-            {activeCard.id === 'case' && (
-              <>
-                {/* Top Row: Large Icon */}
-                <div className="z-10">
-                  <ActiveIcon className="w-14 h-14 text-white transition-transform duration-300 group-hover:scale-105" />
-                </div>
+        {dailyCards.length > 0 ? (
+          <div className="relative w-full md:hidden animate-fade-in">
+            <div
+              onClick={() => setSelectedCard(activeCard)}
+              className="relative overflow-hidden bg-[#0A1128] text-white rounded-[32px] p-8 min-h-[270px] flex flex-col justify-between shadow-lg border border-slate-900 cursor-pointer group transition-all duration-500 hover:shadow-xl hover:scale-[1.005]"
+            >
+              {activeCard.id === 'case' && (
+                <>
+                  <div className="z-10">
+                    <ActiveIcon className="w-14 h-14 text-white transition-transform duration-300 group-hover:scale-105" />
+                  </div>
+                  <div className="z-10 space-y-2 mt-6">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-extrabold tracking-widest text-sky-400 uppercase bg-sky-950/40 px-2.5 py-0.5 rounded-full border border-sky-900/30">
+                        {activeCard.type}
+                      </span>
+                      <span className="text-[10px] font-bold text-slate-400">
+                        {activeCard.citation}
+                      </span>
+                    </div>
+                    <h2 className="text-2xl font-black tracking-tight text-white leading-tight transition-colors duration-200 group-hover:text-sky-300">
+                      {activeCard.title}
+                    </h2>
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium max-w-2xl line-clamp-2">
+                      {activeCard.summary}
+                    </p>
+                  </div>
+                  <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-end p-6 pointer-events-none z-0">
+                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full max-w-[220px] md:max-w-[280px] text-white/5 opacity-80">
+                      <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
+                      <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
+                      <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
+                      <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
+                      <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
+                      <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
+                      <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
+                      <path d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" fill="currentColor" />
+                      <path d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </>
+              )}
 
-                {/* Bottom Row: Text content */}
-                <div className="z-10 space-y-2 mt-6">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-extrabold tracking-widest text-sky-400 uppercase bg-sky-950/40 px-2.5 py-0.5 rounded-full border border-sky-900/30">
-                      {activeCard.type}
+              {activeCard.id === 'term' && (
+                <div className="z-10 flex flex-col justify-between h-full w-full py-1">
+                  <div className="flex items-center gap-3">
+                    <ActiveIcon className="w-8 h-8 text-white flex-shrink-0" />
+                    <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                      Legal Term of the Day
                     </span>
-                    <span className="text-[10px] font-bold text-slate-400">
+                  </div>
+                  <div className="space-y-2 my-auto py-3">
+                    <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-none">
+                      {activeCard.title}
+                    </h2>
+                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium max-w-2xl">
+                      {activeCard.summary}
+                    </p>
+                  </div>
+                  <div className="flex justify-start">
+                    <span className="inline-block px-5 py-2 rounded-xl bg-[#101E35] hover:bg-[#1C2C47] text-white text-xs sm:text-sm font-bold border border-slate-800/80 transition duration-200 cursor-pointer shadow-sm">
+                      See Examples
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {activeCard.id === 'dictum' && (
+                <div className="z-10 flex flex-col justify-between h-full w-full py-1">
+                  <div className="flex items-center gap-3">
+                    <ActiveIcon className="w-8 h-8 text-white flex-shrink-0" />
+                    <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                      Dictum of the Day
+                    </span>
+                  </div>
+                  <div className="space-y-4 my-auto py-3">
+                    <p className="text-base sm:text-lg font-bold text-white leading-relaxed max-w-2xl">
+                      “{activeCard.title}”
+                    </p>
+                    <span className="block text-slate-300 text-xs sm:text-sm font-medium">
                       {activeCard.citation}
                     </span>
                   </div>
-                  <h2 className="text-2xl font-black tracking-tight text-white leading-tight transition-colors duration-200 group-hover:text-sky-300">
-                    {activeCard.title}
-                  </h2>
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium max-w-2xl line-clamp-2">
-                    {activeCard.summary}
-                  </p>
                 </div>
+              )}
 
-                {/* Logo Watermark on the Right */}
-                <div className="absolute right-0 top-0 bottom-0 w-1/2 flex items-center justify-end p-6 pointer-events-none z-0">
-                  <svg
-                    viewBox="0 0 100 100"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-full h-full max-w-[220px] md:max-w-[280px] text-white/5 opacity-80"
-                  >
-                    <circle cx="50" cy="9.5" r="4.5" fill="currentColor" />
-                    <line x1="50" y1="14" x2="50" y2="22" strokeWidth="3" />
-                    <line x1="16" y1="24" x2="84" y2="24" strokeWidth="4" />
-                    <path d="M 6,54 L 16,24 L 26,54" strokeWidth="2.5" />
-                    <path d="M 6,54 L 26,54 A 10,9 0 0 1 6,54 Z" fill="currentColor" />
-                    <path d="M 74,54 L 84,24 L 94,54" strokeWidth="2.5" />
-                    <path d="M 74,54 L 94,54 A 10,9 0 0 1 74,54 Z" fill="currentColor" />
-                    <path d="M 44,24 L 56,24 C 55,26 53,28 53,30 L 53,68 C 53,74 55,78 57,82 L 43,82 C 45,78 47,74 47,68 L 47,30 C 47,28 45,26 44,24 Z" fill="currentColor" />
-                    <path d="M 21,88 L 79,88 C 79,85 78,82 75,82 L 25,82 C 22,82 21,85 21,88 Z" fill="currentColor" />
-                  </svg>
-                </div>
-              </>
-            )}
-
-            {activeCard.id === 'term' && (
-              <div className="z-10 flex flex-col justify-between h-full w-full py-1">
-                {/* Header Row */}
-                <div className="flex items-center gap-3">
-                  <ActiveIcon className="w-8 h-8 text-white flex-shrink-0" />
-                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                    Legal Term of the Day
+              {activeCard.id === 'history' && (
+                <div className="z-10 flex flex-col items-center justify-center text-center h-full w-full py-4">
+                  <ActiveIcon className="w-8 h-8 text-white mb-2" />
+                  <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
+                    Today is Legal in History
                   </span>
-                </div>
-
-                {/* Term & Summary */}
-                <div className="space-y-2 my-auto py-3">
-                  <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-none">
-                    {activeCard.title}
-                  </h2>
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-medium max-w-2xl">
-                    {activeCard.summary}
-                  </p>
-                </div>
-
-                {/* Button */}
-                <div className="flex justify-start">
-                  <span
-                    className="inline-block px-5 py-2 rounded-xl bg-[#101E35] hover:bg-[#1C2C47] text-white text-xs sm:text-sm font-bold border border-slate-800/80 transition duration-200 cursor-pointer shadow-sm"
-                  >
-                    See Examples
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {activeCard.id === 'dictum' && (
-              <div className="z-10 flex flex-col justify-between h-full w-full py-1">
-                {/* Header Row */}
-                <div className="flex items-center gap-3">
-                  <ActiveIcon className="w-8 h-8 text-white flex-shrink-0" />
-                  <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-                    Dictum of the Day
-                  </span>
-                </div>
-
-                {/* Dictum Text & Author */}
-                <div className="space-y-4 my-auto py-3">
-                  <p className="text-base sm:text-lg font-bold text-white leading-relaxed max-w-2xl">
-                    “{activeCard.title}”
-                  </p>
-                  <span className="block text-slate-300 text-xs sm:text-sm font-medium">
+                  <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white my-2">
                     {activeCard.citation}
-                  </span>
+                  </h2>
+                  <p className="text-slate-300 text-xs sm:text-sm font-medium max-w-md">
+                    {activeCard.title}
+                  </p>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
-            {activeCard.id === 'history' && (
-              <div className="z-10 flex flex-col items-center justify-center text-center h-full w-full py-4">
-                {/* Center Icon */}
-                <ActiveIcon className="w-8 h-8 text-white mb-2" />
-                {/* Header Title */}
-                <span className="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
-                  Today is Legal in History
-                </span>
-                {/* Large Date */}
-                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white my-2">
-                  {activeCard.citation}
-                </h2>
-                {/* Event Description */}
-                <p className="text-slate-300 text-xs sm:text-sm font-medium max-w-md">
-                  {activeCard.title}
-                </p>
-              </div>
-            )}
+            <div className="flex justify-center items-center gap-2 mt-4">
+              {dailyCards.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentSlide(index);
+                  }}
+                  className={`transition-all duration-300 cursor-pointer h-2 ${
+                    currentSlide === index 
+                      ? 'w-6 bg-[#0A1128] rounded-full' 
+                      : 'w-2 bg-slate-200 hover:bg-slate-300 rounded-full'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
-
-          {/* Dots Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-4">
-            {dailyCards.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentSlide(index);
-                }}
-                className={`transition-all duration-300 cursor-pointer h-2 ${
-                  currentSlide === index 
-                    ? 'w-6 bg-[#0A1128] rounded-full' 
-                    : 'w-2 bg-slate-200 hover:bg-slate-300 rounded-full'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+        ) : (
+          <div className="md:hidden text-center py-6 text-gray-400 font-medium text-sm">
+            No daily highlights yet. Check back later.
           </div>
-        </div>
+        )}
       </section>
 
       {/* Quick Actions Container Card */}
