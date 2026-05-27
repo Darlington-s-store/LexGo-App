@@ -24,6 +24,7 @@ import FacultyMembers from './FacultyMembers';
 import FacultyLecturers from './FacultyLecturers';
 import FacultyAuditLog from './FacultyAuditLog';
 import FacultySettings from './FacultySettings';
+import FacultyNotifications from './FacultyNotifications';
 
 const FacultyLayout = () => {
   const navigate = useNavigate();
@@ -64,6 +65,8 @@ const FacultyLayout = () => {
         return <FacultyAuditLog />;
       case 'Settings':
         return <FacultySettings />;
+      case 'Notifications':
+        return <FacultyNotifications />;
       default:
         return <FacultyDashboardHome setTab={setActiveTab} />;
     }

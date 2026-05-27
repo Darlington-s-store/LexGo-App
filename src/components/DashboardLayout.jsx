@@ -325,7 +325,7 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
             </h1>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Alarm bell notification icon */}
             <div className="relative">
               <div 
@@ -343,13 +343,11 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
               {isNotificationsOpen && (
                 <>
-                  {/* Invisible backdrop to close dropdown on click outside */}
                   <div 
                     className="fixed inset-0 z-40 bg-transparent" 
                     onClick={() => setIsNotificationsOpen(false)}
                   />
-                  {/* Dropdown container */}
-                  <div className="absolute right-[-72px] sm:right-0 mt-2 w-[280px] sm:w-80 bg-white border border-gray-200 rounded-2xl shadow-xl py-4 px-4 z-50 animate-fade-in flex flex-col gap-3">
+                  <div className="absolute right-0 mt-2 w-[280px] sm:w-80 bg-white border border-gray-200 rounded-2xl shadow-xl py-4 px-4 z-50 animate-fade-in flex flex-col gap-3">
                     <div className="flex justify-between items-center pb-2 border-b border-gray-100">
                       <h4 className="font-black text-sm text-black">Notifications</h4>
                       {notifications.filter(n => n.unread).length > 0 && (
@@ -401,11 +399,24 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
               )}
             </div>
 
+            {/* Logout icon */}
+            <div 
+              onClick={() => {
+                setIsNotificationsOpen(false);
+                setIsProfileDropdownOpen(false);
+                handleLogout();
+              }}
+              className="p-2 text-lexgo-dark rounded-full bg-gray-50 hover:bg-red-50 hover:text-red-500 cursor-pointer transition duration-150 active:scale-95 select-none"
+              title="Log out"
+            >
+              <LogOut size={20} />
+            </div>
+
             {/* Profile badge with dropdown */}
             <div className="relative">
               <div 
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                className="flex items-center gap-3 pl-2 border-l border-gray-100 cursor-pointer hover:opacity-85 transition select-none"
+                className="flex items-center gap-3 pl-2 sm:pl-3 border-l border-gray-100 cursor-pointer hover:opacity-85 transition select-none"
               >
                 <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm select-none">
                   {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : <User size={18} />}
@@ -421,12 +432,10 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
 
               {isProfileDropdownOpen && (
                 <>
-                  {/* Invisible backdrop to close dropdown on click outside */}
                   <div 
                     className="fixed inset-0 z-40 bg-transparent" 
                     onClick={() => setIsProfileDropdownOpen(false)}
                   />
-                  {/* Dropdown Card */}
                   <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl py-2 z-50 animate-fade-in">
                     <button
                       onClick={() => {
@@ -437,19 +446,6 @@ const DashboardLayout = ({ children, title = 'Home' }) => {
                     >
                       <User size={16} className="text-gray-400" />
                       <span>My Profile</span>
-                    </button>
-                    
-                    <hr className="border-gray-50 my-1" />
-
-                    <button
-                      onClick={() => {
-                        setIsProfileDropdownOpen(false);
-                        handleLogout();
-                      }}
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-red-500 hover:text-red-600 hover:bg-red-50/50 transition cursor-pointer text-left bg-transparent border-0"
-                    >
-                      <LogOut size={16} className="text-red-400" />
-                      <span>Log Out</span>
                     </button>
                   </div>
                 </>
