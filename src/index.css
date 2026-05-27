@@ -25,7 +25,7 @@
 
 .pattern-bg {
   /* Use the exact background image provided by the user */
-  background-image: url("./assets/bg-pattern.png?v=2");
+  background-image: url("./assets/bg-pattern.png?v=3");
   background-size: 350px; /* Adjust this value if the icons look too big or small */
   background-position: top left;
   background-repeat: repeat;
