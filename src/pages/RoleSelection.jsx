@@ -11,8 +11,10 @@ const RoleSelection = () => {
   const handleRoleSelect = (role) => {
     if (role === 'student') {
       navigate('/signup');
+    } else if (role === 'lecturer') {
+      navigate('/faculty');
     } else {
-      setPendingRole(role === 'lecturer' ? 'Lecturer' : 'Law Aspirant');
+      setPendingRole('Law Aspirant');
       setShowModal(true);
     }
   };

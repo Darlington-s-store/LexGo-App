@@ -19,6 +19,8 @@ import DictionaryPage from './pages/DictionaryPage';
 import ProfilePage from './pages/ProfilePage';
 import AiPage from './pages/AiPage';
 import NotesPage from './pages/NotesPage';
+import FacultyLayout from './pages/faculty/FacultyLayout';
+
 
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
         <Route path="/verify-phone" element={<PhoneVerification />} />
         <Route path="/setting-up" element={<SettingUp />} />
         <Route path="/success" element={<Success />} />
+
+        {/* Faculty Routes */}
+        <Route path="/faculty" element={<FacultyLayout />} />
 
         {/* Student Dashboard Routes */}
         <Route path="/dashboard" element={<DashboardLayout title="Home"><DashboardHome /></DashboardLayout>} />
